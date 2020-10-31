@@ -1,4 +1,9 @@
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from 'constants';
+import { Player } from 'objects/Player';
+
 export class GameScene extends Phaser.Scene {
+  player!: Player;
+
   public constructor() {
     super({
       key: 'GameScene',
@@ -6,14 +11,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    const text = this.add.text(1280 / 2, 720 / 2, 'Here is the game', {
-      fontSize: '48px',
-      fill: '#fff',
-      fontFamily: 'Pixel miners',
-      align: 'center',
-      lineSpacing: 10,
-    });
+    this.player = new Player(this, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2);
+  }
 
-    text.setOrigin(0.5, 0.5);
+  public update(): void {
+    this.player.update();
   }
 }

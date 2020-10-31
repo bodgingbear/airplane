@@ -23,6 +23,8 @@ export class LoadingScene extends Phaser.Scene {
       false,
       true
     );
+
+    this.load.image('player', 'images/player.png');
   }
 
   public preload(): void {
@@ -75,6 +77,6 @@ export class LoadingScene extends Phaser.Scene {
   };
 
   private changeScene = () => {
-    this.scene.start('MainMenuScene');
+    this.scene.start('GameScene');
   };
 }
