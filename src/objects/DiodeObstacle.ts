@@ -25,7 +25,7 @@ export class DiodeObstacle implements Obstacle {
     this.image = scene.add.image(x, y, 'diode-red');
 
     this.text = scene.add
-      .text(x + 5, y - 5, 'Press SPACE to fix the diode.')
+      .text(x + 8, y - 8, 'Press SPACE to fix the diode.')
       .setVisible(false)
       .setScale(1 / ZOOM);
 

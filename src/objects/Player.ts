@@ -1,7 +1,7 @@
 import { Vector2 } from '../constants';
 
 const PLAYER_COUNTER_WIND_JUMP_Y = 2; // prod: 2
-const WIND_Y_VELOCITY = 0; // prod: 10
+const WIND_Y_VELOCITY = 10; // prod: 10
 
 const PLAYER_VELOCITY = 20; // prod: 20
 
@@ -28,6 +28,8 @@ export class Player {
     this.keys.down?.on('down', () => {
       this.sprite.setY(this.sprite.y + PLAYER_COUNTER_WIND_JUMP_Y);
     });
+
+    this.sprite.anims.play('player-walk');
   }
 
   update() {
@@ -41,6 +43,10 @@ export class Player {
 
     if (this.keys.right?.isDown) {
       velocity.add(new Vector2(PLAYER_VELOCITY, 0));
+    }
+
+    if (velocity.x !== 0) {
+      this.sprite.setScale(velocity.x > 0 ? -1 : 1, 1);
     }
 
     this.body.velocity.set(velocity.x, velocity.y);

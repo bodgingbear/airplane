@@ -42,7 +42,17 @@ export class LoadingScene extends Phaser.Scene {
     this.loadAssets();
   }
 
-  public create(): void {}
+  public create(): void {
+    this.anims.create({
+      key: 'player-walk',
+      frames: this.anims.generateFrameNumbers('player', {
+        start: 0,
+        end: -1,
+      }),
+      frameRate: 6,
+      repeat: -1,
+    });
+  }
 
   public update(): void {
     if (shouldSkipIntro()) {
