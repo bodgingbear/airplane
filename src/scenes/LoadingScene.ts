@@ -25,6 +25,8 @@ export class LoadingScene extends Phaser.Scene {
     );
 
     this.load.image('player', 'images/player.png');
+    this.load.image('diode-red', 'images/diode-red.png');
+    this.load.image('diode-green', 'images/diode-green.png');
   }
 
   public preload(): void {
