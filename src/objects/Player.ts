@@ -1,9 +1,9 @@
 import { Vector2 } from '../constants';
 
-const PLAYER_COUNTER_WIND_JUMP_Y = 10;
-const WIND_Y_VELOCITY = 40;
+const PLAYER_COUNTER_WIND_JUMP_Y = 2; // prod: 2
+const WIND_Y_VELOCITY = 0; // prod: 10
 
-const PLAYER_VELOCITY = 100;
+const PLAYER_VELOCITY = 20; // prod: 20
 
 export class Player {
   body: Phaser.Physics.Arcade.Body;
@@ -38,6 +38,7 @@ export class Player {
     if (this.keys.left?.isDown) {
       velocity.subtract(new Vector2(PLAYER_VELOCITY, 0));
     }
+
     if (this.keys.right?.isDown) {
       velocity.add(new Vector2(PLAYER_VELOCITY, 0));
     }

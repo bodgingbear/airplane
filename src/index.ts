@@ -19,7 +19,7 @@ const game = new Phaser.Game({
     width: 1280,
     height: 720,
   },
-  zoom: 5,
+  zoom: 0.1,
   physics: {
     default: 'arcade',
   },

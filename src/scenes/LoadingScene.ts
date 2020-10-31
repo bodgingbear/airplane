@@ -24,7 +24,12 @@ export class LoadingScene extends Phaser.Scene {
       true
     );
 
-    this.load.image('player', 'images/player.png');
+    this.load.spritesheet('player', 'images/player.png', {
+      frameWidth: 5,
+      frameHeight: 19,
+    });
+
+    this.load.image('plane', 'images/plane.png');
     this.load.image('diode-red', 'images/diode-red.png');
     this.load.image('diode-green', 'images/diode-green.png');
   }

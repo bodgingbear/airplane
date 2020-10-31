@@ -1,3 +1,4 @@
+import { ZOOM } from 'constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
 const DIODE_ZONE_SIDE = 100;
@@ -24,8 +25,9 @@ export class DiodeObstacle implements Obstacle {
     this.image = scene.add.image(x, y, 'diode-red');
 
     this.text = scene.add
-      .text(x + 40, y - 40, 'Press SPACE to fix the diode.')
-      .setVisible(false);
+      .text(x + 5, y - 5, 'Press SPACE to fix the diode.')
+      .setVisible(false)
+      .setScale(1 / ZOOM);
 
     keys.space?.on('down', () => {
       if (this.needsFix && this.isInPlayerProximity) {
