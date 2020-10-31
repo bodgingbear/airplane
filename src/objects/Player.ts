@@ -1,8 +1,9 @@
 import { Vector2 } from '../constants';
 
-const VELOCITY = 200;
+const PLAYER_COUNTER_WIND_JUMP_Y = 10;
+const WIND_Y_VELOCITY = 40;
 
-const WIND_Y_VELOCITY = 50;
+const PLAYER_VELOCITY = 100;
 
 export class Player {
   body: Phaser.Physics.Arcade.Body;
@@ -16,6 +17,14 @@ export class Player {
     this.body = sprite.body as Phaser.Physics.Arcade.Body;
 
     this.keys = scene.input.keyboard.createCursorKeys();
+
+    this.keys.up?.on('down', () => {
+      sprite.setY(sprite.y - PLAYER_COUNTER_WIND_JUMP_Y);
+    });
+
+    this.keys.down?.on('down', () => {
+      sprite.setY(sprite.y + PLAYER_COUNTER_WIND_JUMP_Y);
+    });
   }
 
   update() {
@@ -23,18 +32,13 @@ export class Player {
 
     velocity.add(new Vector2(0, WIND_Y_VELOCITY));
 
+    if (this.keys.left?.isDown) {
+      velocity.subtract(new Vector2(PLAYER_VELOCITY, 0));
+    }
+    if (this.keys.right?.isDown) {
+      velocity.add(new Vector2(PLAYER_VELOCITY, 0));
+    }
+
     this.body.velocity.set(velocity.x, velocity.y);
   }
 }
-
-/*
-
---------------->
-|0 1 2 3 4
-|1
-|2
-|3
-|4
-V
-
-*/
