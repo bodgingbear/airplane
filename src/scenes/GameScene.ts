@@ -12,6 +12,7 @@ import { Obstacle } from 'objects/Obstacle';
 import { AltitudeProvider } from 'objects/AltitudeProvider';
 import { Slider } from 'objects/Slider';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
+import { Sound } from 'sounds';
 
 export class GameScene extends Phaser.Scene {
   player!: Player;
@@ -39,6 +40,12 @@ export class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
+    const noise = this.sound.add(Sound.noises, {
+      loop: true
+    })
+
+    noise.play()
+
     const planeOrigin = new Vector2(0, SCREEN_HEIGHT / 2);
 
     new Clouds(this);

@@ -7,7 +7,7 @@ export const Sound = {
   failedEngine : 'failed-engine',
   fixedEngine : 'fixed-engine',
   introPlaneCrash : 'intro-plane-crash',
-  noises : 'noises',
+  noises : 'noises', // done
   stewardesHit : 'stewardes-hit',
   terrainAheadAlert : 'terrain-ahead-alert'
 }
