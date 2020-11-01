@@ -11,6 +11,8 @@ import { ObstaclesSpawner } from 'objects/ObstaclesSpawner';
 import { Obstacle } from 'objects/Obstacle';
 import { AltitudeProvider } from 'objects/altitudeProvider';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
+import { Slider } from 'objects/Slider';
+import { SliderIndicator } from 'objects/SliderIndicator';
 
 export class GameScene extends Phaser.Scene {
   player!: Player;
@@ -59,6 +61,13 @@ export class GameScene extends Phaser.Scene {
         'left'
       ),
       new ScrewObstacle(this, planeOrigin.x + 30, planeOrigin.y + 12, keys),
+
+      new Slider(
+        this,
+        planeOrigin.x + 135,
+        planeOrigin.y + 17,
+        keys
+      )
     ];
 
     this.player = new Player(
@@ -67,6 +76,7 @@ export class GameScene extends Phaser.Scene {
       SCREEN_HEIGHT / 2,
       keys
     );
+
     this.stweardess = new Stweardess(
       this,
       SCREEN_WIDTH / 2 - 80,
@@ -81,6 +91,8 @@ export class GameScene extends Phaser.Scene {
       .startFollow(this.player.sprite)
       .setLerp(0.1, 0.1)
       .setBackgroundColor('#619CE1');
+
+    this.proximityController = new ProximityController(this.player)
 
     this.proximityController = new ProximityController(this.player);
     this.obstacles.forEach((obstacle) => {

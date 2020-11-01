@@ -46,6 +46,8 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('screw5', 'images/screw5.png');
     this.load.image('diode', 'images/diode.png');
     this.load.image('diode-off', 'images/diode_off.png');
+    this.load.image('slider', 'images/slider.png');
+    this.load.image('slider-indicator', 'images/slider_indicator.png');
     this.load.image('clouds', 'images/clouds.png');
     this.load.image('warning', 'images/warning.png');
     this.load.image('warning2', 'images/warning2.png');
