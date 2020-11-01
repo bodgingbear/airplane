@@ -41,7 +41,8 @@ export class ScrewObstacle implements Obstacle {
       )
       .setVisible(false)
       .setScale(1 / ZOOM)
-      .setBackgroundColor('#999999');
+      .setDepth(5)
+      .setBackgroundColor('black');
 
     keys.space?.on('down', () => {
       if (this.needsFix && this.isInPlayerProximity && this.livesLeft > 0) {

@@ -1,4 +1,4 @@
-import { Rectangle, ZOOM } from '../constants';
+import { Rectangle } from '../constants';
 import { isInDev } from '../isInDev';
 
 export class Airplane {
@@ -6,8 +6,16 @@ export class Airplane {
 
   constructor(scene: Phaser.Scene, private x: number, private y: number) {
     scene.add.image(x, y, 'plane');
+    scene.add.image(x, y, 'passengers-up');
+    scene.add.image(x, y, 'passengers-down').setDepth(5);
 
-    this.getWingsBounds().forEach((bound) =>
+    scene.add.image(x + 50, y - 16, 'enginge_r_clean');
+    scene.add.image(x - 50, y - 16, 'enginge_l_clean');
+
+    scene.add.image(x, y - 105, 'nose');
+    scene.add.image(x, y + 110, 'tail');
+
+    [...this.getWingsBounds(), ...this.getHullBounds()].forEach((bound) =>
       scene.add
         .rectangle(
           bound.x,
@@ -54,6 +62,18 @@ export class Airplane {
 
   getHullBorders = () => [
     new Rectangle(this.x - 17, this.y - 91.5, 1, 73),
+    // aa
+    new Rectangle(this.x - 15, this.y - 96, 8, 65),
+    new Rectangle(this.x + 6, this.y - 96, 8, 65),
+    new Rectangle(this.x - 15, this.y + 8, 8, 65),
+    new Rectangle(this.x + 6, this.y + 8, 8, 65),
+
+    // aa
+
+    new Rectangle(this.x - 17, this.y - 102, 34, 10),
+    new Rectangle(this.x - 17, this.y + 93, 34, 10),
+
+    // bb
     new Rectangle(this.x - 17, this.y + 8, 1, 83.5),
     new Rectangle(this.x + 16, this.y - 91.5, 1, 73),
     new Rectangle(this.x + 16, this.y + 8, 1, 83.5),

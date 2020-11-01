@@ -51,6 +51,12 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('clouds', 'images/clouds.png');
     this.load.image('warning', 'images/warning.png');
     this.load.image('warning2', 'images/warning2.png');
+    this.load.image('passengers-up', 'images/passengers_top.png');
+    this.load.image('passengers-down', 'images/passengers_down.png');
+    this.load.image('enginge_r_clean', 'images/enginge_r_clean.png');
+    this.load.image('enginge_l_clean', 'images/enginge_l_clean.png');
+    this.load.image('nose', 'images/nose.png');
+    this.load.image('tail', 'images/tail.png');
 
     // MARK: Audio
 
