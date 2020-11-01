@@ -1,9 +1,9 @@
 /* eslint-disable new-cap */
+import { isInDev } from 'isInDev';
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 import { SliderIndicator } from './SliderIndicator';
 import { ObstacleIndicator } from './ObstacleIndicator';
-import { isInDev } from 'isInDev';
 
 const SCREW_ZONE_SIDE = 20;
 
@@ -54,8 +54,17 @@ export class Slider implements Obstacle {
         this.fix();
       }
     });
-    const bound = this.getZoneBounds()
-    scene.add.rectangle(bound.x, bound.y, bound.width, bound.height, 0xff0000, isInDev()  ? 0.5 : 0).setOrigin(0)
+    const bound = this.getZoneBounds();
+    scene.add
+      .rectangle(
+        bound.x,
+        bound.y,
+        bound.width,
+        bound.height,
+        0xff0000,
+        isInDev() ? 0.5 : 0
+      )
+      .setOrigin(0);
 
     this.indicator = new ObstacleIndicator(scene, x, y);
   }

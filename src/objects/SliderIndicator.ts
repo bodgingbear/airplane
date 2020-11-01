@@ -1,7 +1,4 @@
-import { ZOOM } from 'constants';
-import { FunctioningState, Obstacle } from './Obstacle';
-
-const SCREW_ZONE_SIDE = 20;
+import { ZOOM } from '../constants';
 
 export class SliderIndicator {
   sliderIndicator: Phaser.GameObjects.Image;
@@ -18,7 +15,7 @@ export class SliderIndicator {
   ) {
     this.sliderIndicator = scene.add
       .image(x, y, 'slider-indicator')
-      .setScale(2 / ZOOM);// 5 pixels
+      .setScale(2 / ZOOM); // 5 pixels
     this.scene = scene;
   }
 

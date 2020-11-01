@@ -5,9 +5,8 @@ export class Airplane {
   hullBounds: Phaser.GameObjects.Rectangle[];
 
   constructor(scene: Phaser.Scene, private x: number, private y: number) {
-    
-        scene.add.image(x + 56, y - 14, 'enginge_r_clean');
-        scene.add.image(x - 56, y - 14, 'enginge_l_clean');
+    scene.add.image(x + 56, y - 14, 'enginge_r_clean');
+    scene.add.image(x - 56, y - 14, 'enginge_l_clean');
     scene.add.image(x, y, 'plane');
     scene.add.image(x, y, 'passengers-up');
     scene.add.image(x, y, 'passengers-down').setDepth(5);
@@ -43,6 +42,7 @@ export class Airplane {
       )
       .map((border) => {
         scene.physics.world.enableBody(border);
+        // eslint-disable-next-line no-param-reassign
         (border.body as Phaser.Physics.Arcade.Body).onCollide = true;
         (border.body as Phaser.Physics.Arcade.Body).setImmovable(true);
         return border;

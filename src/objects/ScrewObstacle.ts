@@ -48,8 +48,17 @@ export class ScrewObstacle implements Obstacle {
       .setDepth(5)
       .setBackgroundColor('black');
 
-      const bound = this.getZoneBounds()
-      scene.add.rectangle(bound.x, bound.y, bound.width, bound.height, 0xff0000, isInDev() ? 0.5 : 0).setOrigin(0)
+    const bound = this.getZoneBounds();
+    scene.add
+      .rectangle(
+        bound.x,
+        bound.y,
+        bound.width,
+        bound.height,
+        0xff0000,
+        isInDev() ? 0.5 : 0
+      )
+      .setOrigin(0);
 
     keys.space?.on('down', () => {
       if (this.needsFix && this.isInPlayerProximity && this.livesLeft > 0) {

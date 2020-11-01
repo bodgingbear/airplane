@@ -1,5 +1,4 @@
 import { EventEmitter } from 'packages/utils';
-import { SCREEN_HEIGHT, SCREEN_WIDTH, ZOOM } from '../constants';
 
 import { Obstacle } from './Obstacle';
 

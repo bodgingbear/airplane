@@ -42,7 +42,7 @@ export class DeadScene extends Phaser.Scene {
 
     this.cameras.main.once(
       Phaser.Cameras.Scene2D.Events.FADE_IN_COMPLETE,
-      (cam, effect) => {
+      () => {
         this.input.keyboard.on('keydown', (): void => {
           this.scene.start('GameScene');
         });

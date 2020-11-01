@@ -41,7 +41,7 @@ export class GameScene extends Phaser.Scene {
   public create(): void {
     const planeOrigin = new Vector2(0, SCREEN_HEIGHT / 2);
 
-    const clouds = new Clouds(this);
+    new Clouds(this);
 
     const airplane = new Airplane(this, planeOrigin.x, planeOrigin.y);
     const keys = this.input.keyboard.createCursorKeys();
