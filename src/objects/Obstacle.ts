@@ -12,6 +12,8 @@ export interface Obstacle {
 
   makeCritical: () => void;
 
+  altitudeDecrease: number;
+
   functioningState: FunctioningState;
 
   update: () => void;

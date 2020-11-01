@@ -9,6 +9,7 @@ import { ProximityController } from 'objects/ProximityController';
 import { ScrewObstacle } from 'objects/ScrewObstacle';
 import { ObstaclesSpawner } from 'objects/ObstaclesSpawner';
 import { Obstacle } from 'objects/Obstacle';
+import { AltitudeProvider } from 'objects/altitudeProvider';
 import { Slider } from 'objects/Slider';
 import { SliderIndicator } from 'objects/SliderIndicator';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
@@ -23,6 +24,8 @@ export class GameScene extends Phaser.Scene {
   fallingController!: FallingController;
 
   obstacles!: Obstacle[];
+
+  altitudeProvider!: AltitudeProvider;
 
   get characters(): Phaser.GameObjects.Sprite[] {
     return [this.player.sprite, this.stweardess.sprite];
@@ -62,15 +65,19 @@ export class GameScene extends Phaser.Scene {
       new Slider(this, planeOrigin.x + 135, planeOrigin.y + 17, keys),
     ];
 
-    // this.obstacles.forEach((obs) => obs.break());
+    this.player = new Player(
+      this,
+      SCREEN_WIDTH / 2 - 80,
+      SCREEN_HEIGHT / 2,
+      keys
+    );
 
     this.stweardess = new Stweardess(
       this,
       SCREEN_WIDTH / 2 - 80,
-      SCREEN_HEIGHT / 2 - 35
+      SCREEN_HEIGHT / 2 - 50
     );
 
-    this.player = new Player(this, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2, keys);
     this.physics.add.collider(this.player.sprite, this.stweardess.sprite);
 
     this.cameras.main
@@ -87,6 +94,10 @@ export class GameScene extends Phaser.Scene {
       this.proximityController.addObstacle(obstacle);
     });
 
+    this.altitudeProvider = new AltitudeProvider(this, this.obstacles);
+
+    this.altitudeProvider.on('plane-crashed', this.endGame);
+
     this.fallingController = new FallingController(airplane, this.player);
     this.fallingController.on('player-off-airplane', () => {
       this.player.fallOffAirplane();
@@ -99,7 +110,7 @@ export class GameScene extends Phaser.Scene {
       this.player.exitAirplane();
       this.cameras.main.shake(100 * 60 * 10, isInDev() ? 0 : 0.00005);
     });
-    this.player.on('on-falling-end', () => this.scene.restart());
+    this.player.on('on-falling-end', this.endGame);
 
     const hullBounds = this.add.group(airplane.hullBounds);
 
@@ -109,8 +120,16 @@ export class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player.sprite, hullBounds);
 
-    const obstaclesSpawner = new ObstaclesSpawner(this, this.obstacles);
+    new ObstaclesSpawner(this, this.obstacles);
+
+    this.scene.run('UIScene', {
+      altitudeProvider: this.altitudeProvider,
+    });
   }
+
+  endGame = () => {
+    this.scene.restart();
+  };
 
   public update(): void {
     this.player.update();

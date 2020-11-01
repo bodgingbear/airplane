@@ -13,6 +13,8 @@ export class Slider implements Obstacle {
 
   functioningState: FunctioningState = 'working';
 
+  altitudeDecrease: number = 7;
+
   isInPlayerProximity = false;
 
   private sliderIndicator: SliderIndicator;
@@ -106,5 +108,7 @@ export class Slider implements Obstacle {
     );
   };
 
-  update() {}
+  update() {
+    this.indicator.update();
+  }
 }

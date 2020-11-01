@@ -11,6 +11,7 @@ export class DiodeObstacle implements Obstacle {
   text: Phaser.GameObjects.Text;
 
   functioningState: FunctioningState = 'working';
+  altitudeDecrease: number = 5;
 
   isInPlayerProximity = false;
 
