@@ -1,3 +1,5 @@
+import { Sound } from 'sounds';
+
 export class IntroScene extends Phaser.Scene {
   private count = 1;
 
@@ -60,9 +62,10 @@ export class IntroScene extends Phaser.Scene {
       .setVisible(false);
 
     intro1.anims.play('intro-1-anim');
+    this.sound.play(Sound.introPlaneCrash);
 
     intro1.on('animationrepeat', () => {
-      if (this.count++ === 4) {
+      if (this.count++ === 13) {
         tween2.play();
         intro2player.anims.play('player-walk');
         intro2sprite.anims.play('intro-2-anim');
