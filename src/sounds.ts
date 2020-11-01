@@ -8,5 +8,5 @@ export enum BogdanVoice {
   bogdan1 = 'bogdan1',
   bogdan2 = 'bogdan2',
   bogdan3 = 'bogdan3',
-  bogdan4 = 'bogdan4'
+  bogdan4 = 'bogdan4',
 }

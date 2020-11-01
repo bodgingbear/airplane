@@ -1,15 +1,14 @@
 /* eslint-disable new-cap */
-import { BogdanVoice } from 'sounds';
+import { BogdanVoice } from '../sounds';
 import { Obstacle } from './Obstacle';
 
 export class ObstaclesSpawner {
-
   constructor(scene: Phaser.Scene, obstacles: Obstacle[]) {
-    let easiness = 10;
+    let easiness = 7;
 
-    for (const voice in BogdanVoice) { 
+    Object.keys(BogdanVoice).forEach((voice) => {
       scene.sound.add(voice);
-    }
+    });
 
     const callback = () => {
       const minNextSpawnTime = easiness * 2000;
@@ -23,11 +22,18 @@ export class ObstaclesSpawner {
         (obstacle) => obstacle.functioningState === 'working'
       );
 
+      const brokenObstacles = obstacles.filter(
+        (obstacle) => obstacle.functioningState === 'broken'
+      );
+      if (brokenObstacles.length > 0) {
+        brokenObstacles[0].makeCritical();
+      }
+
       if (workingObstacles.length === 0) {
         return;
       }
 
-      if (easiness > 6 && Math.random() * easiness < 50) {
+      if (easiness > 2 && Math.random() * easiness < 50) {
         console.log(`Drop easiness: ${easiness}`);
         easiness--;
       }
