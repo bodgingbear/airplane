@@ -2,6 +2,9 @@ import { Rectangle, ZOOM } from '../constants';
 import { isInDev } from '../isInDev';
 
 export class Airplane {
+
+  hullBounds: Phaser.GameObjects.Rectangle[]
+
   constructor(scene: Phaser.Scene, private x: number, private y: number) {
     scene.add.image(x, y, 'plane');
 
@@ -18,7 +21,7 @@ export class Airplane {
         .setOrigin(0)
     );
 
-    this.getHullBorders().forEach((border) =>
+    this.hullBounds = this.getHullBorders().map((border) =>
       scene.add
         .rectangle(
           border.x,
@@ -29,7 +32,12 @@ export class Airplane {
           isInDev() ? 0.5 : 0
         )
         .setOrigin(0)
-    );
+    ).map((border) => {
+      scene.physics.world.enableBody(border);
+      (border.body as Phaser.Physics.Arcade.Body).onCollide = true;
+      (border.body as Phaser.Physics.Arcade.Body).setImmovable(true)
+      return border
+    });
   }
 
   getBounds = () => [
@@ -40,7 +48,9 @@ export class Airplane {
   ];
 
   getHullBorders = () => [
-    new Rectangle(this.x - 17, this.y - 91.5, 1, 183),
-    new Rectangle(this.x + 16, this.y - 91.5, 1, 183),
+    new Rectangle(this.x - 17, this.y - 91.5, 1, 73),
+    new Rectangle(this.x - 17, this.y + 8, 1, 83.5),
+    new Rectangle(this.x + 16, this.y - 91.5, 1, 73),
+    new Rectangle(this.x + 16, this.y + 8, 1, 83.5),
   ];
 }
