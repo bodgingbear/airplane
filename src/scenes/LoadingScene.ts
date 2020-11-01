@@ -61,9 +61,9 @@ export class LoadingScene extends Phaser.Scene {
     // MARK: Audio
 
     // eslint-disable-next-line guard-for-in, no-restricted-syntax
-    for (const soundName in Sound) {
-      this.load.audio(soundName, `audio/${soundName}.mp3`);
-    }
+    Object.values(Sound).forEach((value) => {
+      this.load.audio(value, `audio/${value}.mp3`);
+    })
 
     // eslint-disable-next-line guard-for-in, no-restricted-syntax
     for (const voice in BogdanVoice) {

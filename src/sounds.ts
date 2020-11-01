@@ -1,6 +1,15 @@
-export enum Sound {
-  hammer = 'hammer',
-  diode = 'diode',
+export const Sound = {
+  hammer : 'hammer',
+  diode : 'diode',
+  grubasSpada : 'Grubas-spada',
+  walkingOnWing : 'Walking-on-wing',
+  criticalWarning : 'critical-warning',
+  failedEngine : 'failed-engine',
+  fixedEngine : 'fixed-engine',
+  introPlaneCrash : 'intro-plane-crash',
+  noises : 'noises',
+  stewardesHit : 'stewardes-hit',
+  terrainAheadAlert : 'terrain-ahead-alert'
 }
 
 export enum BogdanVoice {
