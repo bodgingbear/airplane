@@ -2,6 +2,7 @@ import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 import { Sound } from '../sounds';
 import { ObstacleIndicator } from './ObstacleIndicator';
+import { isInDev } from 'isInDev';
 
 const DIODE_ZONE_SIDE = 20;
 
@@ -50,6 +51,10 @@ export class DiodeObstacle implements Obstacle {
 
     scene.sound.add(Sound.diode);
 
+    const bound = this.getZoneBounds()
+    scene.add.rectangle(bound.x, bound.y, bound.width, bound.height, 0xff0000, isInDev() ? 0.5 : 0).setOrigin(0)
+
+
     this.indicator = new ObstacleIndicator(scene, x, y);
   }
 
@@ -62,6 +67,10 @@ export class DiodeObstacle implements Obstacle {
     this.functioningState = 'broken';
     this.image.setTexture('diode-off');
     this.indicator.indicateBroken();
+
+    if (this.isInPlayerProximity) {
+      this.text.setVisible(true);
+    }
   }
 
   getID = () => {

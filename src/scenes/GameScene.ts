@@ -11,7 +11,6 @@ import { ObstaclesSpawner } from 'objects/ObstaclesSpawner';
 import { Obstacle } from 'objects/Obstacle';
 import { AltitudeProvider } from 'objects/altitudeProvider';
 import { Slider } from 'objects/Slider';
-import { SliderIndicator } from 'objects/SliderIndicator';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
 
 export class GameScene extends Phaser.Scene {
@@ -75,8 +74,8 @@ export class GameScene extends Phaser.Scene {
         keys,
         'left'
       ),
-      new Slider(this, planeOrigin.x + 50, planeOrigin.y - 13, keys),
-      new Slider(this, planeOrigin.x - 50, planeOrigin.y - 13, keys),
+      new Slider(this, planeOrigin.x + 56, planeOrigin.y - 13, keys),
+      new Slider(this, planeOrigin.x - 56, planeOrigin.y - 13, keys),
     ];
 
     this.player = new Player(
@@ -103,7 +102,6 @@ export class GameScene extends Phaser.Scene {
 
     this.proximityController = new ProximityController(this.player);
 
-    this.proximityController = new ProximityController(this.player);
     this.obstacles.forEach((obstacle) => {
       this.proximityController.addObstacle(obstacle);
     });

@@ -18,8 +18,7 @@ export class SliderIndicator {
   ) {
     this.sliderIndicator = scene.add
       .image(x, y, 'slider-indicator')
-      .setScale(2 / ZOOM)
-      .setTintFill(0x0000ff); // 5 pixels
+      .setScale(2 / ZOOM);// 5 pixels
     this.scene = scene;
   }
 
