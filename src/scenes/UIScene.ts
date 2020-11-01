@@ -12,7 +12,17 @@ export class UIScene extends Phaser.Scene {
   }
 
   get description(): string { 
-      return `ALTITUDE ${this.alitudeProvider.altitude.toString()}`
+      return `ALTITUDE ${this.alitudeProvider.altitude.toString()}M`
+  }
+
+  get altitudeBackgroundColor(): string { 
+      if (this.alitudeProvider.altitude > 6500) {
+          return 'green'
+      } else if (this.alitudeProvider.altitude > 3000) {
+          return 'orange'
+      } else {
+          return 'red'
+      }
   }
 
   timeValue: number = 0
@@ -22,9 +32,11 @@ export class UIScene extends Phaser.Scene {
   }
 
   public create(): void {
-  this.text= this.add.text(25, 25, this.description).setFontSize(40);
+  this.text= this.add.text(25, 25, this.description).setFontSize(40)
+  .setBackgroundColor(this.altitudeBackgroundColor);
   this.timer = this.add.text(25, 85, `Time: ${this.formatTime(0)}`)
-  .setFontSize(40);
+  .setFontSize(40)
+  .setBackgroundColor('black');
 
   this.time.addEvent({
       delay: 100,
@@ -36,6 +48,7 @@ export class UIScene extends Phaser.Scene {
 
   updateTimer = () => {
     this.timer.setText(this.formatTime(this.timeValue+=100))
+    this.text.setBackgroundColor(this.altitudeBackgroundColor);
   }
 
   formatTime = (time: number): string => {

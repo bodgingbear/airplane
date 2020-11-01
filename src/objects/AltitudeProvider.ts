@@ -29,11 +29,11 @@ export class AltitudeProvider extends EventEmitter<'plane-crashed'> {
             return
         }
 
-        this.altitude -= this.obstacles.filter((obstacle) => obstacle.functioningState === 'broken' || obstacle.functioningState === 'critical').map((obstacle) => {
+        this.altitude -= Math.floor(this.obstacles.filter((obstacle) => obstacle.functioningState === 'broken' || obstacle.functioningState === 'critical').map((obstacle) => {
             return obstacle.functioningState === 'critical' ? obstacle.altitudeDecrease * 2.5 : obstacle.altitudeDecrease
         }).reduce( (sum, current) => {
             return sum + current
-        }, 0);
+        }, 0));
     }
 
 }
