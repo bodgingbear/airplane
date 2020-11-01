@@ -70,7 +70,7 @@ export class Player extends EventEmitter<'on-falling-end'> {
     }
 
     if (velocity.x !== 0) {
-      this.sprite.setScale(velocity.x > 0 ? -1 : 1, 1);
+      this.sprite.flipX = velocity.x > 0;
     }
 
     this.body.velocity.set(velocity.x, velocity.y);

@@ -1,4 +1,4 @@
-import { ZOOM } from 'constants';
+import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
 const DIODE_ZONE_SIDE = 20;
