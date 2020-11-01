@@ -11,6 +11,7 @@ export class ScrewObstacle implements Obstacle {
   text: Phaser.GameObjects.Text;
 
   functioningState: FunctioningState = 'working';
+
   altitudeDecrease: number = 2;
 
   isInPlayerProximity = false;
@@ -27,13 +28,14 @@ export class ScrewObstacle implements Obstacle {
     scene: Phaser.Scene,
     private x: number,
     private y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys
+    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    textAlign: 'left' | 'right'
   ) {
     this.image = scene.add.image(x, y, 'screw5');
 
     this.text = scene.add
       .text(
-        x + 8,
+        x + (textAlign === 'left' ? -8 : 8),
         y - 8,
         `Press SPACE ${this.livesLeft} times to screw the screw.`
       )

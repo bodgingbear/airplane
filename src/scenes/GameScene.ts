@@ -61,8 +61,20 @@ export class GameScene extends Phaser.Scene {
         'left'
       ),
 
-      new ScrewObstacle(this, planeOrigin.x + 30, planeOrigin.y + 12, keys),
-      new ScrewObstacle(this, planeOrigin.x - 30, planeOrigin.y + 12, keys),
+      new ScrewObstacle(
+        this,
+        planeOrigin.x + 30,
+        planeOrigin.y + 12,
+        keys,
+        'right'
+      ),
+      new ScrewObstacle(
+        this,
+        planeOrigin.x - 30,
+        planeOrigin.y + 12,
+        keys,
+        'left'
+      ),
       new Slider(this, planeOrigin.x + 135, planeOrigin.y + 17, keys),
     ];
 
