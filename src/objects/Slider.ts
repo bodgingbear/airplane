@@ -15,7 +15,7 @@ export class Slider implements Obstacle {
 
   functioningState: FunctioningState = 'working';
 
-  altitudeDecrease: number = 7;
+  altitudeDecrease: number = 3;
 
   isInPlayerProximity = false;
 

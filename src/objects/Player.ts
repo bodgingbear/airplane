@@ -6,7 +6,7 @@ import { isInDev } from '../isInDev';
 const PLAYER_COUNTER_WIND_JUMP_Y = 2;
 const WIND_Y_VELOCITY = isInDev() ? 0 : 10;
 
-const PLAYER_VELOCITY = 20;
+const PLAYER_VELOCITY = 31;
 
 export class Player extends EventEmitter<'on-falling-end'> {
   body: Phaser.Physics.Arcade.Body;

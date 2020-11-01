@@ -13,7 +13,7 @@ export class DiodeObstacle implements Obstacle {
 
   functioningState: FunctioningState = 'working';
 
-  altitudeDecrease: number = 5;
+  altitudeDecrease: number = 2;
 
   isInPlayerProximity = false;
 

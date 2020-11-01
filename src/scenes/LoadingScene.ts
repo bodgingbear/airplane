@@ -1,6 +1,6 @@
 import { loadAsset } from 'packages/utils';
 import { shouldSkipIntro } from 'packages/utils/shouldSkipIntro';
-import { Sound, BogdanVoice } from 'sounds';
+import { Sound } from 'sounds';
 
 export class LoadingScene extends Phaser.Scene {
   private introImage!: Phaser.GameObjects.Sprite;
@@ -65,10 +65,6 @@ export class LoadingScene extends Phaser.Scene {
       this.load.audio(value, `audio/${value}.mp3`);
     });
 
-    // eslint-disable-next-line guard-for-in, no-restricted-syntax
-    for (const voice in BogdanVoice) {
-      this.load.audio(voice, `audio/${voice}.mp3`);
-    }
 
     // MARK: Intro
     this.load.image('intro1-1', loadAsset('images/intro1/intro1.png'));

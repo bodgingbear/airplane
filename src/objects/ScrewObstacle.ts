@@ -13,7 +13,7 @@ export class ScrewObstacle implements Obstacle {
 
   functioningState: FunctioningState = 'working';
 
-  altitudeDecrease: number = 2;
+  altitudeDecrease: number = 4;
 
   isInPlayerProximity = false;
 
