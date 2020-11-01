@@ -32,6 +32,7 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('plane', 'images/plane.png');
     this.load.image('diode', 'images/diode.png');
     this.load.image('diode-off', 'images/diode_off.png');
+    this.load.image('clouds', 'images/clouds.png');
   }
 
   public preload(): void {
