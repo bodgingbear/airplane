@@ -9,7 +9,7 @@ export class ScrewObstacle implements Obstacle {
 
   text: Phaser.GameObjects.Text;
 
-  functioningState: FunctioningState = 'broken';
+  functioningState: FunctioningState = 'working';
 
   isInPlayerProximity = false;
 
@@ -25,7 +25,7 @@ export class ScrewObstacle implements Obstacle {
     private y: number,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
-    this.image = scene.add.image(x, y, 'screw0');
+    this.image = scene.add.image(x, y, 'screw5');
 
     this.text = scene.add
       .text(
@@ -43,8 +43,6 @@ export class ScrewObstacle implements Obstacle {
         scene.sound.play(Sound.hammer);
       }
       if (this.livesLeft === 9) {
-        console.log(9);
-
         this.image.setTexture('screw1');
       }
       if (this.livesLeft === 7) {
@@ -62,6 +60,15 @@ export class ScrewObstacle implements Obstacle {
     });
 
     scene.sound.add(Sound.hammer);
+  }
+
+  makeCritical() {
+    this.functioningState = 'critical';
+  }
+
+  break() {
+    this.functioningState = 'broken';
+    this.image.setTexture('screw1');
   }
 
   getID = () => {

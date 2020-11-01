@@ -8,5 +8,9 @@ export interface Obstacle {
 
   getID: () => string;
 
+  break: () => void;
+
+  makeCritical: () => void;
+
   functioningState: FunctioningState;
 }

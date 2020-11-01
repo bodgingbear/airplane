@@ -24,12 +24,12 @@ export class GameScene extends Phaser.Scene {
   public create(): void {
     const planeOrigin = new Vector2(0, SCREEN_HEIGHT / 2);
 
-    const clouds = new Clouds(this, planeOrigin.x, planeOrigin.y);
+    const clouds = new Clouds(this);
 
     const airplane = new Airplane(this, planeOrigin.x, planeOrigin.y);
     const keys = this.input.keyboard.createCursorKeys();
 
-    const diodes = [
+    const obstacles = [
       new DiodeObstacle(
         this,
         planeOrigin.x + 182,
@@ -44,16 +44,17 @@ export class GameScene extends Phaser.Scene {
         keys,
         'left'
       ),
+      new ScrewObstacle(this, planeOrigin.x + 30, planeOrigin.y + 12, keys),
     ];
 
-    const screw = new ScrewObstacle(
+    obstacles.forEach((obs) => obs.break());
+
+    this.player = new Player(
       this,
-      planeOrigin.x + 30,
-      planeOrigin.y + 12,
+      SCREEN_WIDTH / 2 - 80,
+      SCREEN_HEIGHT / 2,
       keys
     );
-
-    this.player = new Player(this, SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2, keys);
 
     this.cameras.main
       .setZoom(ZOOM)
@@ -63,10 +64,9 @@ export class GameScene extends Phaser.Scene {
       .setBackgroundColor('#619CE1');
 
     this.proximityController = new ProximityController(this.player);
-    diodes.forEach((diode) => {
-      this.proximityController.addObstacle(diode);
+    obstacles.forEach((obstacle) => {
+      this.proximityController.addObstacle(obstacle);
     });
-    this.proximityController.addObstacle(screw);
 
     this.fallingController = new FallingController(airplane, this.player);
     this.fallingController.on('player-off-airplane', () => {
@@ -75,11 +75,11 @@ export class GameScene extends Phaser.Scene {
     this.fallingController.on('player-entered-airplane', () => {
       this.player.enterAirplane();
       this.cameras.main.shakeEffect.effectComplete();
-    })
+    });
     this.fallingController.on('player-exit-airplane', () => {
       this.player.exitAirplane();
       this.cameras.main.shake(100 * 60 * 10, isInDev() ? 0 : 0.00005);
-    })
+    });
     this.player.on('on-falling-end', () => this.scene.restart());
 
     const hullBounds = this.add.group(airplane.hullBounds);

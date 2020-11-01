@@ -4,9 +4,12 @@ import { Rectangle } from '../constants';
 import { Airplane } from './Airplane';
 import { Player } from './Player';
 
-export class FallingController extends EventEmitter<'player-off-airplane' | 'player-entered-airplane' | 'player-exit-airplane'> {
+export class FallingController extends EventEmitter<
+  'player-off-airplane' | 'player-entered-airplane' | 'player-exit-airplane'
+> {
   alreadyEmittedFall = false;
-  isInAirplane = true
+
+  isInAirplane = true;
 
   constructor(private airplane: Airplane, private player: Player) {
     super();
@@ -28,26 +31,25 @@ export class FallingController extends EventEmitter<'player-off-airplane' | 'pla
       );
 
     const isPlayerInAirplane = this.airplane
-    .getHullBounds()
-    .some((bound) => 
-      Phaser.Geom.Intersects.RectangleToRectangle(
-       bound,
-       this.player.getBounds() 
-      )
-    );
+      .getHullBounds()
+      .some((bound) =>
+        Phaser.Geom.Intersects.RectangleToRectangle(
+          bound,
+          this.player.getBounds()
+        )
+      );
 
-    const isOutsidePlane = (!isPlayerOnWing && !isPlayerInAirplane)
+    const isOutsidePlane = !isPlayerOnWing && !isPlayerInAirplane;
 
     if (isOutsidePlane && !this.alreadyEmittedFall) {
       this.alreadyEmittedFall = true;
       this.emit('player-off-airplane');
     } else if (isPlayerInAirplane && !this.isInAirplane) {
       this.emit('player-entered-airplane');
-      this.isInAirplane = true
+      this.isInAirplane = true;
     } else if (this.isInAirplane && !isPlayerInAirplane) {
       this.emit('player-exit-airplane');
-      this.isInAirplane = false
+      this.isInAirplane = false;
     }
-
   }
 }

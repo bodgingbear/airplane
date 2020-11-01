@@ -9,7 +9,7 @@ export class DiodeObstacle implements Obstacle {
 
   text: Phaser.GameObjects.Text;
 
-  functioningState: FunctioningState = 'broken';
+  functioningState: FunctioningState = 'working';
 
   isInPlayerProximity = false;
 
@@ -24,7 +24,7 @@ export class DiodeObstacle implements Obstacle {
     private keys: Phaser.Types.Input.Keyboard.CursorKeys,
     textSide: 'right' | 'left'
   ) {
-    this.image = scene.add.image(x, y, 'diode-off');
+    this.image = scene.add.image(x, y, 'diode');
 
     this.text = scene.add
       .text(
@@ -42,6 +42,15 @@ export class DiodeObstacle implements Obstacle {
     });
 
     scene.sound.add(Sound.diode);
+  }
+
+  makeCritical() {
+    this.functioningState = 'critical';
+  }
+
+  break() {
+    this.functioningState = 'broken';
+    this.image.setTexture('diode-off');
   }
 
   getID = () => {
