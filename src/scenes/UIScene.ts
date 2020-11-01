@@ -1,4 +1,4 @@
-import { AltitudeProvider } from 'objects/altitudeProvider';
+import { AltitudeProvider } from 'objects/AltitudeProvider';
 
 export class UIScene extends Phaser.Scene {
   alitudeProvider!: AltitudeProvider;

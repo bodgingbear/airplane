@@ -9,7 +9,7 @@ import { ProximityController } from 'objects/ProximityController';
 import { ScrewObstacle } from 'objects/ScrewObstacle';
 import { ObstaclesSpawner } from 'objects/ObstaclesSpawner';
 import { Obstacle } from 'objects/Obstacle';
-import { AltitudeProvider } from 'objects/altitudeProvider';
+import { AltitudeProvider } from 'objects/AltitudeProvider';
 import { Slider } from 'objects/Slider';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
 

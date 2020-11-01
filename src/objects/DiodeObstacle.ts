@@ -27,7 +27,7 @@ export class DiodeObstacle implements Obstacle {
     private scene: Phaser.Scene,
     private x: number,
     private y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    keys: Phaser.Types.Input.Keyboard.CursorKeys,
     textSide: 'right' | 'left'
   ) {
     this.image = scene.add.image(x, y, 'diode');

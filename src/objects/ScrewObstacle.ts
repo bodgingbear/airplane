@@ -29,7 +29,7 @@ export class ScrewObstacle implements Obstacle {
     scene: Phaser.Scene,
     private x: number,
     private y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    keys: Phaser.Types.Input.Keyboard.CursorKeys,
     textAlign: 'left' | 'right'
   ) {
     this.image = scene.add.image(x, y, 'screw5');

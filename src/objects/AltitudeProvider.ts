@@ -6,9 +6,9 @@ export class AltitudeProvider extends EventEmitter<'plane-crashed'> {
   altitude: number;
 
   constructor(
-    private scene: Phaser.Scene,
+    scene: Phaser.Scene,
     private obstacles: Obstacle[],
-    private initialAltitude: number = 8000
+    initialAltitude: number = 8000
   ) {
     super();
     this.altitude = initialAltitude;

@@ -7,7 +7,7 @@ export class Stweardess {
 
   sprite: Phaser.GameObjects.Sprite;
 
-  constructor(private scene: Phaser.Scene, x: number, y: number) {
+  constructor(scene: Phaser.Scene, x: number, y: number) {
     this.sprite = scene.add.sprite(x, y, 'stweardess');
     scene.physics.world.enable(this.sprite);
 
