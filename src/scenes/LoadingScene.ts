@@ -60,13 +60,35 @@ export class LoadingScene extends Phaser.Scene {
 
     // MARK: Audio
 
+    // eslint-disable-next-line guard-for-in, no-restricted-syntax
     for (const soundName in Sound) {
       this.load.audio(soundName, `audio/${soundName}.mp3`);
     }
 
+    // eslint-disable-next-line guard-for-in, no-restricted-syntax
     for (const voice in BogdanVoice) {
       this.load.audio(voice, `audio/${voice}.mp3`);
     }
+
+    // MARK: Intro
+    this.load.image('intro1-1', loadAsset('images/intro1/intro1.png'));
+    this.load.image('intro1-2', loadAsset('images/intro1/intro2.png'));
+
+    this.load.image('intro2-bg', loadAsset('images/intro2/intro2_bg.png'));
+    this.load.image('intro2-00', loadAsset('images/intro2/intro2-00.png'));
+    this.load.image('intro2-02', loadAsset('images/intro2/intro2-02.png'));
+    this.load.image('intro2-04', loadAsset('images/intro2/intro2-04.png'));
+    this.load.image('intro2-06', loadAsset('images/intro2/intro2-06.png'));
+    this.load.image('intro2-08', loadAsset('images/intro2/intro2-08.png'));
+    this.load.image('intro2-11', loadAsset('images/intro2/intro2-11.png'));
+    this.load.image('intro2-12', loadAsset('images/intro2/intro2-12.png'));
+
+    this.load.image('intro3-0', loadAsset('images/intro3/intro0.png'));
+    this.load.image('intro3-1', loadAsset('images/intro3/intro2.png'));
+    this.load.image('intro3-2', loadAsset('images/intro3/intro4.png'));
+    this.load.image('intro3-3', loadAsset('images/intro3/intro6.png'));
+    this.load.image('intro3-4', loadAsset('images/intro3/intro8.png'));
+    this.load.image('intro3-5', loadAsset('images/intro3/intro10.png'));
   }
 
   public preload(): void {
@@ -95,6 +117,110 @@ export class LoadingScene extends Phaser.Scene {
         end: -1,
       }),
       frameRate: 3,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'intro-1-anim',
+      frames: [
+        {
+          key: 'intro1-1',
+          frame: 0,
+        },
+        {
+          key: 'intro1-2',
+          frame: 0,
+        },
+      ],
+      frameRate: 4,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'intro-2-anim',
+      frames: [
+        {
+          key: 'intro2-00',
+          frame: 0,
+        },
+        {
+          key: 'intro2-02',
+          frame: 0,
+        },
+        {
+          key: 'intro2-04',
+          frame: 0,
+        },
+        {
+          key: 'intro2-06',
+          frame: 0,
+        },
+        {
+          key: 'intro2-08',
+          frame: 0,
+        },
+        {
+          key: 'intro2-11',
+          frame: 0,
+        },
+        {
+          key: 'intro2-12',
+          frame: 0,
+        },
+      ],
+      frameRate: 2,
+      repeat: 0,
+    });
+
+    this.anims.create({
+      key: 'intro-3-anim',
+      frames: [
+        {
+          key: 'intro3-0',
+          frame: 0,
+        },
+        {
+          key: 'intro3-1',
+          frame: 0,
+        },
+        {
+          key: 'intro3-2',
+          frame: 0,
+        },
+        {
+          key: 'intro3-3',
+          frame: 0,
+        },
+        {
+          key: 'intro3-4',
+          frame: 0,
+        },
+        {
+          key: 'intro3-5',
+          frame: 0,
+        },
+      ],
+      frameRate: 2,
+      repeat: 0,
+    });
+
+    this.anims.create({
+      key: 'intro-3-anim-2',
+      frames: [
+        {
+          key: 'intro3-0',
+          frame: 0,
+        },
+        {
+          key: 'intro3-1',
+          frame: 0,
+        },
+        {
+          key: 'intro3-2',
+          frame: 0,
+        },
+      ],
+      frameRate: 2,
       repeat: -1,
     });
   }
@@ -139,6 +265,10 @@ export class LoadingScene extends Phaser.Scene {
   };
 
   private changeScene = () => {
-    this.scene.start('GameScene');
+    if (process.env.SKIP_INTRO2 === 'true') {
+      this.scene.start('GameScene');
+    } else {
+      this.scene.start('IntroScene');
+    }
   };
 }
