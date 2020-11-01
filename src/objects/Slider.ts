@@ -1,5 +1,6 @@
 /* eslint-disable new-cap */
 import { isInDev } from 'isInDev';
+import { Sound } from 'sounds';
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 import { SliderIndicator } from './SliderIndicator';
@@ -27,7 +28,7 @@ export class Slider implements Obstacle {
   }
 
   constructor(
-    scene: Phaser.Scene,
+    private scene: Phaser.Scene,
     private x: number,
     private y: number,
     keys: Phaser.Types.Input.Keyboard.CursorKeys
@@ -96,7 +97,9 @@ export class Slider implements Obstacle {
       this.functioningState = 'working';
       this.text.setVisible(false);
       this.indicator.indicateFixed();
+      this.scene.sound.play(Sound.fixedEngine);
     } else {
+      this.scene.sound.play(Sound.failedEngine);
       this.sliderIndicator.Movement();
     }
   };

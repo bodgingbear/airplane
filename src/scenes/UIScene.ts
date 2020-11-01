@@ -1,4 +1,5 @@
 import { AltitudeProvider } from 'objects/AltitudeProvider';
+import { Sound } from 'sounds';
 
 export class UIScene extends Phaser.Scene {
   alitudeProvider!: AltitudeProvider;
@@ -6,6 +7,8 @@ export class UIScene extends Phaser.Scene {
   text!: Phaser.GameObjects.Text;
 
   timer!: Phaser.GameObjects.Text;
+
+  soundPlayed: boolean = false;
 
   public constructor() {
     super({
@@ -24,6 +27,13 @@ export class UIScene extends Phaser.Scene {
     if (this.alitudeProvider.altitude > 3000) {
       return 'orange';
     }
+
+    if (!this.soundPlayed) {
+      this.sound.play(Sound.terrainAheadAlert);
+
+      this.soundPlayed = true;
+    }
+
     return 'red';
   }
 

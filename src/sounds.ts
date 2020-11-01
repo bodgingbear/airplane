@@ -1,16 +1,16 @@
 export const Sound = {
-  hammer : 'hammer',
-  diode : 'diode',
-  grubasSpada : 'Grubas-spada', //done
-  walkingOnWing : 'Walking-on-wing', //done
-  criticalWarning : 'critical-warning', //done
-  failedEngine : 'failed-engine',
-  fixedEngine : 'fixed-engine',
-  introPlaneCrash : 'intro-plane-crash',
-  noises : 'noises', // done
-  stewardesHit : 'stewardes-hit',
-  terrainAheadAlert : 'terrain-ahead-alert'
-}
+  hammer: 'hammer',
+  diode: 'diode',
+  grubasSpada: 'Grubas-spada', // done
+  walkingOnWing: 'Walking-on-wing',
+  criticalWarning: 'critical-warning',
+  failedEngine: 'failed-engine',
+  fixedEngine: 'fixed-engine', // done
+  introPlaneCrash: 'intro-plane-crash', // done,
+  noises: 'noises', // done
+  stewardesHit: 'stewardes-hit', // wontdo
+  terrainAheadAlert: 'terrain-ahead-alert', // done
+};
 
 export enum BogdanVoice {
   bogdan0 = 'bogdan0',
