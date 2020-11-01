@@ -1,7 +1,7 @@
 export const Sound = {
   hammer : 'hammer',
   diode : 'diode',
-  grubasSpada : 'Grubas-spada',
+  grubasSpada : 'Grubas-spada', //done
   walkingOnWing : 'Walking-on-wing',
   criticalWarning : 'critical-warning',
   failedEngine : 'failed-engine',

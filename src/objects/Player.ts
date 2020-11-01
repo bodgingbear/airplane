@@ -1,4 +1,5 @@
 import { EventEmitter } from 'packages/utils';
+import { Sound } from 'sounds';
 import { Vector2 } from '../constants';
 import { isInDev } from '../isInDev';
 
@@ -91,6 +92,7 @@ export class Player extends EventEmitter<'on-falling-end'> {
     );
 
   fallOffAirplane = () => {
+    this.scene.sound.play(Sound.grubasSpada)
     const duration = 2000;
     this.scene.cameras.main.shake(2000, 0.0005);
     this.scene.tweens.add({
