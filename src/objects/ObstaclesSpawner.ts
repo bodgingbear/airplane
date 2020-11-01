@@ -1,4 +1,5 @@
 /* eslint-disable new-cap */
+import { Sound } from 'sounds';
 import { Obstacle } from './Obstacle';
 
 export class ObstaclesSpawner {
@@ -6,8 +7,10 @@ export class ObstaclesSpawner {
     let easiness = 10;
 
     const callback = () => {
+      const minNextSpawnTime = easiness * 2000;
+
       scene.time.addEvent({
-        delay: Phaser.Math.Between(easiness * 1000, easiness * 1000 + 3000),
+        delay: Phaser.Math.Between(minNextSpawnTime, minNextSpawnTime + 3000),
         callback,
       });
 
@@ -19,13 +22,16 @@ export class ObstaclesSpawner {
         return;
       }
 
-      if (easiness > 6 && Math.random() < 0.6) {
+      if (easiness > 6 && Math.random() * easiness < 50) {
+        console.log(`Drop easiness: ${easiness}`);
         easiness--;
       }
 
       const obstacle =
         workingObstacles[Phaser.Math.Between(0, workingObstacles.length - 1)];
 
+      // @TODO play sth else
+      scene.sound.play(Sound.diode);
       obstacle.break();
     };
 

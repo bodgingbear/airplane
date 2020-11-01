@@ -47,13 +47,14 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('diode', 'images/diode.png');
     this.load.image('diode-off', 'images/diode_off.png');
     this.load.image('clouds', 'images/clouds.png');
+    this.load.image('warning', 'images/warning.png');
+    this.load.image('warning2', 'images/warning2.png');
 
     // MARK: Audio
 
-    for (let soundName in Sound) { 
+    for (const soundName in Sound) {
       this.load.audio(soundName, `audio/${soundName}.mp3`);
     }
-
   }
 
   public preload(): void {

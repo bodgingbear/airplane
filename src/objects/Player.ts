@@ -45,7 +45,7 @@ export class Player extends EventEmitter<'on-falling-end'> {
     this.debugRect = scene.add
       .rectangle(bound.x, bound.y, bound.width, bound.height, 0x00ff00)
       .setOrigin(0)
-      .setAlpha(0.5);
+      .setAlpha(isInDev() ? 0.5 : 0);
   }
 
   update() {
@@ -110,12 +110,18 @@ export class Player extends EventEmitter<'on-falling-end'> {
   };
 
   enterAirplane = () => {
-    this.current_wind_y_velocity = Math.max(this.current_wind_y_velocity - WIND_Y_VELOCITY, 0)
-  }
+    this.current_wind_y_velocity = Math.max(
+      this.current_wind_y_velocity - WIND_Y_VELOCITY,
+      0
+    );
+  };
 
   exitAirplane = () => {
-    this.current_wind_y_velocity = Math.min(this.current_wind_y_velocity + WIND_Y_VELOCITY, WIND_Y_VELOCITY)
-  }
+    this.current_wind_y_velocity = Math.min(
+      this.current_wind_y_velocity + WIND_Y_VELOCITY,
+      WIND_Y_VELOCITY
+    );
+  };
 }
 
 // const particlesGroup = this.scene.add.group(

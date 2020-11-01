@@ -13,4 +13,6 @@ export interface Obstacle {
   makeCritical: () => void;
 
   functioningState: FunctioningState;
+
+  update: () => void;
 }

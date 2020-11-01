@@ -15,7 +15,7 @@ export class Airplane {
           bound.width,
           bound.height,
           0xff0000,
-          0.5
+          isInDev() ? 0.5 : 0
         )
         .setOrigin(0)
     );
@@ -29,7 +29,7 @@ export class Airplane {
             border.width,
             border.height,
             0x00ff00,
-            0.5
+            isInDev() ? 0.5 : 0
           )
           .setOrigin(0)
       )
@@ -50,9 +50,7 @@ export class Airplane {
     new Rectangle(this.x - 95 - 50, this.y - 2, 50, 15),
   ];
 
-  getHullBounds = () => [
-    new Rectangle(this.x - 17, this.y - 91.5, 34, 183),
-  ]
+  getHullBounds = () => [new Rectangle(this.x - 17, this.y - 91.5, 34, 183)];
 
   getHullBorders = () => [
     new Rectangle(this.x - 17, this.y - 91.5, 1, 73),
