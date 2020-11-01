@@ -103,10 +103,11 @@ export class Player extends EventEmitter<'on-falling-end'> {
       targets: this.sprite,
       y: { from: this.sprite.y, to: this.sprite.y + 500 },
       duration,
-      onComplete: () => {
-        this.emit('on-falling-end');
-      },
     });
+
+    setTimeout(() => {
+      this.emit('on-falling-end');
+    }, 1000);
   };
 
   enterAirplane = () => {

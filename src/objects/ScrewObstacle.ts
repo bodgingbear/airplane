@@ -37,7 +37,10 @@ export class ScrewObstacle implements Obstacle {
       .text(
         x + (textAlign === 'left' ? -8 : 8),
         y - 8,
-        `Press SPACE ${this.livesLeft} times to screw the screw.`
+        `Press SPACE ${this.livesLeft} times to screw the screw.`,
+        {
+          fontFamily: 'Pixel miners',
+        }
       )
       .setVisible(false)
       .setScale(1 / ZOOM)

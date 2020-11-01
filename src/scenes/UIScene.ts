@@ -14,7 +14,7 @@ export class UIScene extends Phaser.Scene {
   }
 
   get description(): string {
-    return `ALTITUDE:  ${this.alitudeProvider.altitude.toString()}`;
+    return `ALTITUDE:  ${Math.max(this.alitudeProvider.altitude, 0)}`;
   }
 
   get altitudeBackgroundColor(): string {

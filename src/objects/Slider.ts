@@ -40,7 +40,9 @@ export class Slider implements Obstacle {
     this.sliderIndicator.setVisible(false);
 
     this.text = scene.add
-      .text(x + 8, y - 8, `Press SPACE on the green zone to repair the flap`)
+      .text(x + 8, y - 8, `Press SPACE on the green zone to repair the flap`, {
+        fontFamily: 'Pixel miners',
+      })
       .setBackgroundColor('black')
       .setDepth(5)
       .setVisible(false)

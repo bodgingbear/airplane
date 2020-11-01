@@ -27,6 +27,8 @@ export class GameScene extends Phaser.Scene {
 
   altitudeProvider!: AltitudeProvider;
 
+  ending = false;
+
   get characters(): Phaser.GameObjects.Sprite[] {
     return [this.player.sprite, this.stweardess.sprite];
   }
@@ -142,7 +144,21 @@ export class GameScene extends Phaser.Scene {
   }
 
   endGame = () => {
-    this.scene.restart();
+    if (this.ending) {
+      return;
+    }
+
+    this.ending = true;
+    this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+    this.cameras.main.once(
+      Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
+      () => {
+        this.scene.stop();
+        this.scene.stop('UIScene');
+        this.scene.start('DeadScene');
+      }
+    );
   };
 
   public update(): void {

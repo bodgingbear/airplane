@@ -35,7 +35,10 @@ export class DiodeObstacle implements Obstacle {
       .text(
         x + (textSide === 'right' ? 8 : -8),
         y - 8,
-        'Press SPACE to fix the diode.'
+        'Press SPACE to fix the diode.',
+        {
+          fontFamily: 'Pixel miners',
+        }
       )
       .setVisible(false)
       .setBackgroundColor('black')

@@ -44,7 +44,7 @@ export class IntroScene extends Phaser.Scene {
     intro3Bg.setVisible(false);
 
     const t1 = this.add
-      .text(1280 / 2, 720 / 2 - 310, 'This is our plane game', {
+      .text(1280 / 2, 720 / 2 - 310, "It shouldn't be doing that...", {
         fontFamily: 'Pixel miners',
         fontSize: '48px',
       })

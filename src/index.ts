@@ -8,6 +8,7 @@ import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
 import { GameScene } from './scenes/GameScene';
+import { DeadScene } from './scenes/DeadScene';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -21,6 +22,7 @@ const game = new Phaser.Game({
     GameScene,
     UIScene,
     IntroScene,
+    DeadScene,
   ],
   scale: {
     parent: 'app',

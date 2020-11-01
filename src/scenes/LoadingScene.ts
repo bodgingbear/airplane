@@ -89,6 +89,9 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('intro3-3', loadAsset('images/intro3/intro6.png'));
     this.load.image('intro3-4', loadAsset('images/intro3/intro8.png'));
     this.load.image('intro3-5', loadAsset('images/intro3/intro10.png'));
+
+    this.load.image('sleep1', loadAsset('images/intro3/sleep1.png'));
+    this.load.image('sleep2', loadAsset('images/intro3/sleep2.png'));
   }
 
   public preload(): void {
@@ -217,6 +220,22 @@ export class LoadingScene extends Phaser.Scene {
         },
         {
           key: 'intro3-2',
+          frame: 0,
+        },
+      ],
+      frameRate: 2,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'sleep-anim',
+      frames: [
+        {
+          key: 'sleep1',
+          frame: 0,
+        },
+        {
+          key: 'sleep2',
           frame: 0,
         },
       ],
