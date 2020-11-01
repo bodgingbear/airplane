@@ -1,4 +1,4 @@
-import { ZOOM } from 'constants';
+import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 import { SliderIndicator } from './SliderIndicator';
 
@@ -101,6 +101,8 @@ export class Slider implements Obstacle {
     );  
   };
 
+update() {
 
+}
 
 }

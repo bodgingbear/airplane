@@ -1,6 +1,7 @@
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 import { Sound } from '../sounds';
+import { ObstacleIndicator } from './ObstacleIndicator';
 
 const DIODE_ZONE_SIDE = 20;
 
@@ -12,6 +13,8 @@ export class DiodeObstacle implements Obstacle {
   functioningState: FunctioningState = 'working';
 
   isInPlayerProximity = false;
+
+  indicator: ObstacleIndicator;
 
   get needsFix(): boolean {
     return this.functioningState !== 'working';
@@ -42,15 +45,19 @@ export class DiodeObstacle implements Obstacle {
     });
 
     scene.sound.add(Sound.diode);
+
+    this.indicator = new ObstacleIndicator(scene, x, y);
   }
 
   makeCritical() {
     this.functioningState = 'critical';
+    this.indicator.indicateCritical();
   }
 
   break() {
     this.functioningState = 'broken';
     this.image.setTexture('diode-off');
+    this.indicator.indicateBroken();
   }
 
   getID = () => {
@@ -62,6 +69,7 @@ export class DiodeObstacle implements Obstacle {
     this.functioningState = 'working';
     this.text.setVisible(false);
     this.scene.sound.play(Sound.diode);
+    this.indicator.indicateFixed();
   }
 
   markPlayerInProximity = () => {
@@ -86,4 +94,8 @@ export class DiodeObstacle implements Obstacle {
       DIODE_ZONE_SIDE
     );
   };
+
+  update() {
+    this.indicator.update();
+  }
 }

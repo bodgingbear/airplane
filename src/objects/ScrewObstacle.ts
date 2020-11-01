@@ -1,6 +1,7 @@
 import { Sound } from 'sounds';
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
+import { ObstacleIndicator } from './ObstacleIndicator';
 
 const SCREW_ZONE_SIDE = 20;
 
@@ -14,6 +15,8 @@ export class ScrewObstacle implements Obstacle {
   isInPlayerProximity = false;
 
   livesLeft = 10;
+
+  indicator: ObstacleIndicator;
 
   get needsFix(): boolean {
     return this.functioningState !== 'working';
@@ -41,34 +44,38 @@ export class ScrewObstacle implements Obstacle {
       if (this.needsFix && this.isInPlayerProximity && this.livesLeft > 0) {
         this.livesLeft--;
         scene.sound.play(Sound.hammer);
-      }
-      if (this.livesLeft === 9) {
-        this.image.setTexture('screw1');
-      }
-      if (this.livesLeft === 7) {
-        this.image.setTexture('screw2');
-      }
-      if (this.livesLeft === 5) {
-        this.image.setTexture('screw3');
-      }
-      if (this.livesLeft === 3) {
-        this.image.setTexture('screw4');
-      }
-      if (this.livesLeft === 0) {
-        this.fix();
+        if (this.livesLeft === 9) {
+          this.image.setTexture('screw1');
+        }
+        if (this.livesLeft === 7) {
+          this.image.setTexture('screw2');
+        }
+        if (this.livesLeft === 5) {
+          this.image.setTexture('screw3');
+        }
+        if (this.livesLeft === 3) {
+          this.image.setTexture('screw4');
+        }
+        if (this.livesLeft === 0) {
+          this.fix();
+        }
       }
     });
 
     scene.sound.add(Sound.hammer);
+
+    this.indicator = new ObstacleIndicator(scene, x, y - 5);
   }
 
   makeCritical() {
     this.functioningState = 'critical';
+    this.indicator.indicateCritical();
   }
 
   break() {
     this.functioningState = 'broken';
     this.image.setTexture('screw1');
+    this.indicator.indicateBroken();
   }
 
   getID = () => {
@@ -80,20 +87,22 @@ export class ScrewObstacle implements Obstacle {
     this.functioningState = 'working';
     this.text.setVisible(false);
     this.livesLeft = 10;
+    this.indicator.indicateFixed();
   }
 
   markPlayerInProximity = () => {
+    this.isInPlayerProximity = true;
+
     if (this.needsFix) {
       this.text.setVisible(true);
-      this.isInPlayerProximity = true;
     }
   };
 
   unmarkPlayerInProximity = () => {
     if (this.needsFix) {
       this.text.setVisible(false);
-      this.isInPlayerProximity = false;
     }
+    this.isInPlayerProximity = false;
   };
 
   getZoneBounds = (): Phaser.Geom.Rectangle => {
@@ -104,4 +113,8 @@ export class ScrewObstacle implements Obstacle {
       SCREW_ZONE_SIDE
     );
   };
+
+  update() {
+    this.indicator.update();
+  }
 }

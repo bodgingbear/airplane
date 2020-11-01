@@ -8,6 +8,7 @@ import { Stweardess } from 'objects/Stweardess';
 import { ProximityController } from 'objects/ProximityController';
 import { ScrewObstacle } from 'objects/ScrewObstacle';
 import { ObstaclesSpawner } from 'objects/ObstaclesSpawner';
+import { Obstacle } from 'objects/Obstacle';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
 import { Slider } from 'objects/Slider';
 import { SliderIndicator } from 'objects/SliderIndicator';
@@ -20,6 +21,8 @@ export class GameScene extends Phaser.Scene {
   proximityController!: ProximityController;
 
   fallingController!: FallingController;
+
+  obstacles!: Obstacle[];
 
   get characters(): Phaser.GameObjects.Sprite[] {
     return [this.player.sprite, this.stweardess.sprite];
@@ -39,7 +42,7 @@ export class GameScene extends Phaser.Scene {
     const airplane = new Airplane(this, planeOrigin.x, planeOrigin.y);
     const keys = this.input.keyboard.createCursorKeys();
 
-    const obstacles = [
+    this.obstacles = [
       new DiodeObstacle(
         this,
         planeOrigin.x + 182,
@@ -64,7 +67,7 @@ export class GameScene extends Phaser.Scene {
       )
     ];
 
-    obstacles.forEach((obs) => obs.break());
+    // this.obstacles.forEach((obs) => obs.break());
 
     this.stweardess = new Stweardess(
       this,
@@ -84,7 +87,8 @@ export class GameScene extends Phaser.Scene {
 
     this.proximityController = new ProximityController(this.player)
 
-    obstacles.forEach((obstacle) => {
+    this.proximityController = new ProximityController(this.player);
+    this.obstacles.forEach((obstacle) => {
       this.proximityController.addObstacle(obstacle);
     });
 
@@ -110,7 +114,7 @@ export class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player.sprite, hullBounds);
 
-    const obstaclesSpawner = new ObstaclesSpawner(this, obstacles);
+    const obstaclesSpawner = new ObstaclesSpawner(this, this.obstacles);
   }
 
   public update(): void {
@@ -118,5 +122,6 @@ export class GameScene extends Phaser.Scene {
     this.stweardess.update();
     this.proximityController.update();
     this.fallingController.update();
+    this.obstacles.forEach((obs) => obs.update());
   }
 }
