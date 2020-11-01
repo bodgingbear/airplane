@@ -3,6 +3,7 @@ import { DiodeObstacle } from 'objects/DiodeObstacle';
 import { FallingController } from 'objects/FallingController';
 import { Player } from 'objects/Player';
 import { ProximityController } from 'objects/ProximityController';
+import { ScrewObstacle } from 'objects/ScrewObstacle';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
 
 export class GameScene extends Phaser.Scene {
@@ -31,6 +32,13 @@ export class GameScene extends Phaser.Scene {
       keys
     );
 
+    const screw = new ScrewObstacle(
+      this,
+      planeOrigin.x + 30,
+      planeOrigin.y + 12,
+      keys
+    )
+
     this.player = new Player(this, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2, keys);
 
     this.cameras.main
@@ -42,6 +50,7 @@ export class GameScene extends Phaser.Scene {
 
     this.proximityController = new ProximityController(this.player);
     this.proximityController.addObstacle(diode);
+    this.proximityController.addObstacle(screw);
 
     this.fallingController = new FallingController(airplane, this.player);
     this.fallingController.on('player-off-airplane', () => {
