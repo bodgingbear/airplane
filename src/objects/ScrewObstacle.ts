@@ -1,8 +1,7 @@
 import { ZOOM } from 'constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
-const DIODE_ZONE_SIDE = 100;
-
+const SCREW_ZONE_SIDE = 20;
 
 export class ScrewObstacle implements Obstacle {
     image: Phaser.GameObjects.Image;
@@ -81,10 +80,10 @@ export class ScrewObstacle implements Obstacle {
 
   getZoneBounds = (): Phaser.Geom.Rectangle => {
     return new Phaser.Geom.Rectangle(
-      this.x,
-      this.y,
-      DIODE_ZONE_SIDE,
-      DIODE_ZONE_SIDE
+      this.x - SCREW_ZONE_SIDE / 2,
+      this.y - SCREW_ZONE_SIDE / 2,
+      SCREW_ZONE_SIDE,
+      SCREW_ZONE_SIDE
     );
   };
 }
