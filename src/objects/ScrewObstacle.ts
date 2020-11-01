@@ -79,6 +79,7 @@ export class ScrewObstacle implements Obstacle {
     this.image.setTexture('screw5');
     this.functioningState = 'working';
     this.text.setVisible(false);
+    this.livesLeft = 10;
   }
 
   markPlayerInProximity = () => {
