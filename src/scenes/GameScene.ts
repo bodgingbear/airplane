@@ -1,4 +1,6 @@
+import { Airplane } from 'objects/Airplane';
 import { DiodeObstacle } from 'objects/DiodeObstacle';
+import { FallingController } from 'objects/FallingController';
 import { Player } from 'objects/Player';
 import { ProximityController } from 'objects/ProximityController';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
@@ -7,6 +9,8 @@ export class GameScene extends Phaser.Scene {
   player!: Player;
 
   proximityController!: ProximityController;
+
+  fallingController!: FallingController;
 
   public constructor() {
     super({
@@ -17,8 +21,7 @@ export class GameScene extends Phaser.Scene {
   public create(): void {
     const planeOrigin = new Vector2(0, SCREEN_HEIGHT / 2);
 
-    this.add.image(planeOrigin.x, planeOrigin.y, 'plane');
-
+    const airplane = new Airplane(this, planeOrigin.x, planeOrigin.y);
     const keys = this.input.keyboard.createCursorKeys();
 
     const diode = new DiodeObstacle(
@@ -34,14 +37,21 @@ export class GameScene extends Phaser.Scene {
       .setZoom(ZOOM)
       .centerOn(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
       .startFollow(this.player.sprite)
-      .setLerp(0.1, 0.1);
+      .setLerp(0.1, 0.1)
+      .setBackgroundColor('#619CE1');
 
     this.proximityController = new ProximityController(this.player);
     this.proximityController.addObstacle(diode);
+
+    this.fallingController = new FallingController(airplane, this.player);
+    this.fallingController.on('player-off-airplane', () => {
+      alert('out');
+    });
   }
 
   public update(): void {
     this.player.update();
     this.proximityController.update();
+    this.fallingController.update();
   }
 }
