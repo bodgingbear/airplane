@@ -11,7 +11,7 @@ export class AltitudeProvider extends EventEmitter<'plane-crashed'> {
     constructor(
         private scene: Phaser.Scene,
         private obstacles: Obstacle[],
-        private initialAltitude: number = 12000
+        private initialAltitude: number = 8000
         ) { 
         super();
         this.altitude = initialAltitude;
@@ -29,8 +29,8 @@ export class AltitudeProvider extends EventEmitter<'plane-crashed'> {
             return
         }
 
-        this.altitude -= this.obstacles.filter((obstacle) => obstacle.functioningState === 'broken').map((obstacle) => {
-            return obstacle.altitudeDecrease
+        this.altitude -= this.obstacles.filter((obstacle) => obstacle.functioningState === 'broken' || obstacle.functioningState === 'critical').map((obstacle) => {
+            return obstacle.functioningState === 'critical' ? obstacle.altitudeDecrease * 2.5 : obstacle.altitudeDecrease
         }).reduce( (sum, current) => {
             return sum + current
         }, 0);
