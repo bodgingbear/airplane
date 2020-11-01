@@ -12,16 +12,19 @@ export class FallingController extends EventEmitter<
 
   isInAirplane = true;
 
-  stepsSound: Phaser.Sound.BaseSound
+  stepsSound: Phaser.Sound.BaseSound;
 
-  constructor(private airplane: Airplane, private player: Player, private scene: Phaser.Scene) {
+  constructor(
+    private airplane: Airplane,
+    private player: Player,
+    private scene: Phaser.Scene
+  ) {
     super();
     this.stepsSound = this.scene.sound.add(Sound.walkingOnWing, {
       loop: true,
-      volume: 0.1
-    })
+      volume: 0.1,
+    });
   }
-
 
   update() {
     const isPlayerOnWing = this.airplane
@@ -60,14 +63,18 @@ export class FallingController extends EventEmitter<
       this.isInAirplane = false;
     }
 
-    if(this.isInAirplane === false && (this.player.sprite.body.velocity.x !== 0 || this.player.sprite.body.velocity.y !== 0)) {
-      if(!this.stepsSound.isPlaying) {
-        this.stepsSound.play()
+    if (
+      this.isInAirplane === false &&
+      (this.player.sprite.body.velocity.x !== 0 ||
+        this.player.sprite.body.velocity.y !== 0)
+    ) {
+      if (!this.stepsSound.isPlaying) {
+        this.stepsSound.play();
       }
     }
 
-    if(this.isInAirplane && this.stepsSound.isPlaying) {
-      this.stepsSound.stop()
+    if (this.isInAirplane && this.stepsSound.isPlaying) {
+      this.stepsSound.stop();
     }
   }
 }

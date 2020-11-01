@@ -65,7 +65,7 @@ export class IntroScene extends Phaser.Scene {
     this.sound.play(Sound.introPlaneCrash);
 
     intro1.on('animationrepeat', () => {
-      if (this.count++ === 13) {
+      if (this.count++ === 8) {
         tween2.play();
         intro2player.anims.play('player-walk');
         intro2sprite.anims.play('intro-2-anim');

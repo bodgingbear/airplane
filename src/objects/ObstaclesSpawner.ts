@@ -26,7 +26,7 @@ export class ObstaclesSpawner {
         (obstacle) => obstacle.functioningState === 'broken'
       );
       if (brokenObstacles.length > 0) {
-        scene.sound.play(Sound.criticalWarning)
+        scene.sound.play(Sound.criticalWarning);
         brokenObstacles[0].makeCritical();
       }
 
