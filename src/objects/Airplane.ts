@@ -46,6 +46,9 @@ export class Airplane {
     new Rectangle(this.x + 91, this.y + 11, 87, 15),
     new Rectangle(this.x + 95, this.y - 2, 50, 15),
     new Rectangle(this.x - 17, this.y - 91.5, 34, 183),
+    new Rectangle(this.x - 15 - 80, this.y - 20, 80, 40),
+    new Rectangle(this.x - 91 - 87, this.y + 11, 87, 15),
+    new Rectangle(this.x - 95 - 50, this.y - 2, 50, 15),
   ];
 
   getHullBorders = () => [

@@ -1,7 +1,7 @@
 import { ZOOM } from 'constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
-const DIODE_ZONE_SIDE = 20;
+const DIODE_ZONE_SIDE = 10;
 
 export class DiodeObstacle implements Obstacle {
   image: Phaser.GameObjects.Image;
@@ -20,12 +20,17 @@ export class DiodeObstacle implements Obstacle {
     scene: Phaser.Scene,
     private x: number,
     private y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys
+    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    textSide: 'right' | 'left'
   ) {
     this.image = scene.add.image(x, y, 'diode-off');
 
     this.text = scene.add
-      .text(x + 8, y - 8, 'Press SPACE to fix the diode.')
+      .text(
+        x + (textSide === 'right' ? 8 : -8),
+        y - 8,
+        'Press SPACE to fix the diode.'
+      )
       .setVisible(false)
       .setScale(1 / ZOOM);
 

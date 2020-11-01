@@ -29,19 +29,29 @@ export class GameScene extends Phaser.Scene {
     const airplane = new Airplane(this, planeOrigin.x, planeOrigin.y);
     const keys = this.input.keyboard.createCursorKeys();
 
-    const diode = new DiodeObstacle(
-      this,
-      planeOrigin.x + 182,
-      planeOrigin.y + 23,
-      keys
-    );
+    const diodes = [
+      new DiodeObstacle(
+        this,
+        planeOrigin.x + 182,
+        planeOrigin.y + 23,
+        keys,
+        'right'
+      ),
+      new DiodeObstacle(
+        this,
+        planeOrigin.x - 182,
+        planeOrigin.y + 23,
+        keys,
+        'left'
+      ),
+    ];
 
     const screw = new ScrewObstacle(
       this,
       planeOrigin.x + 30,
       planeOrigin.y + 12,
       keys
-    )
+    );
 
     this.player = new Player(this, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2, keys);
 
@@ -53,7 +63,9 @@ export class GameScene extends Phaser.Scene {
       .setBackgroundColor('#619CE1');
 
     this.proximityController = new ProximityController(this.player);
-    this.proximityController.addObstacle(diode);
+    diodes.forEach((diode) => {
+      this.proximityController.addObstacle(diode);
+    });
     this.proximityController.addObstacle(screw);
 
     this.fallingController = new FallingController(airplane, this.player);
@@ -64,16 +76,14 @@ export class GameScene extends Phaser.Scene {
 
     this.cameras.main.shake(100 * 60 * 10, isInDev() ? 0 : 0.00005);
 
-    const hullBounds = this.add.group(
-      airplane.hullBounds
-    )
+    const hullBounds = this.add.group(airplane.hullBounds);
 
-    this.physics.add.collider(this.player.sprite, hullBounds)
+    this.physics.add.collider(this.player.sprite, hullBounds);
   }
 
   public update(): void {
     this.player.update();
-  this.proximityController.update();
+    this.proximityController.update();
     this.fallingController.update();
   }
 }
