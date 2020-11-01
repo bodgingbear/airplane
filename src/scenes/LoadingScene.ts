@@ -1,5 +1,6 @@
 import { loadAsset } from 'packages/utils';
 import { shouldSkipIntro } from 'packages/utils/shouldSkipIntro';
+import { Sound } from 'sounds';
 
 export class LoadingScene extends Phaser.Scene {
   private introImage!: Phaser.GameObjects.Sprite;
@@ -29,9 +30,14 @@ export class LoadingScene extends Phaser.Scene {
       frameHeight: 19,
     });
 
+    this.load.spritesheet('stweardess', 'images/stweardess.png', {
+      frameWidth: 7,
+      frameHeight: 27,
+    });
+
+    // MARK: Images
+
     this.load.image('plane', 'images/plane.png');
-    this.load.image('diode-red', 'images/diode-red.png');
-    this.load.image('diode-green', 'images/diode-green.png');
     this.load.image('screw0', 'images/screw0.png');
     this.load.image('screw1', 'images/screw1.png');
     this.load.image('screw2', 'images/screw2.png');
@@ -42,6 +48,14 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('diode-off', 'images/diode_off.png');
     this.load.image('slider', 'images/slider.png');
     this.load.image('slider-indicator', 'images/slider_indicator.png');
+    this.load.image('clouds', 'images/clouds.png');
+
+    // MARK: Audio
+
+    for (let soundName in Sound) { 
+      this.load.audio(soundName, `audio/${soundName}.mp3`);
+    }
+
   }
 
   public preload(): void {
@@ -60,6 +74,16 @@ export class LoadingScene extends Phaser.Scene {
         end: -1,
       }),
       frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'stweardess-walk',
+      frames: this.anims.generateFrameNumbers('stweardess', {
+        start: 0,
+        end: -1,
+      }),
+      frameRate: 3,
       repeat: -1,
     });
   }

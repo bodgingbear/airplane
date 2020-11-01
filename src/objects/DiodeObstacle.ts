@@ -1,5 +1,6 @@
-import { ZOOM } from 'constants';
+import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
+import { Sound } from '../sounds';
 
 const DIODE_ZONE_SIDE = 20;
 
@@ -8,7 +9,7 @@ export class DiodeObstacle implements Obstacle {
 
   text: Phaser.GameObjects.Text;
 
-  functioningState: FunctioningState = 'broken';
+  functioningState: FunctioningState = 'working';
 
   isInPlayerProximity = false;
 
@@ -17,15 +18,20 @@ export class DiodeObstacle implements Obstacle {
   }
 
   constructor(
-    scene: Phaser.Scene,
+    private scene: Phaser.Scene,
     private x: number,
     private y: number,
-    private keys: Phaser.Types.Input.Keyboard.CursorKeys
+    private keys: Phaser.Types.Input.Keyboard.CursorKeys,
+    textSide: 'right' | 'left'
   ) {
-    this.image = scene.add.image(x, y, 'diode-off');
+    this.image = scene.add.image(x, y, 'diode');
 
     this.text = scene.add
-      .text(x + 8, y - 8, 'Press SPACE to fix the diode.')
+      .text(
+        x + (textSide === 'right' ? 8 : -8),
+        y - 8,
+        'Press SPACE to fix the diode.'
+      )
       .setVisible(false)
       .setScale(1 / ZOOM);
 
@@ -34,6 +40,17 @@ export class DiodeObstacle implements Obstacle {
         this.fix();
       }
     });
+
+    scene.sound.add(Sound.diode);
+  }
+
+  makeCritical() {
+    this.functioningState = 'critical';
+  }
+
+  break() {
+    this.functioningState = 'broken';
+    this.image.setTexture('diode-off');
   }
 
   getID = () => {
@@ -44,6 +61,7 @@ export class DiodeObstacle implements Obstacle {
     this.image.setTexture('diode');
     this.functioningState = 'working';
     this.text.setVisible(false);
+    this.scene.sound.play(Sound.diode);
   }
 
   markPlayerInProximity = () => {

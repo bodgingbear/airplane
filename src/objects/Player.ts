@@ -14,6 +14,8 @@ export class Player extends EventEmitter<'on-falling-end'> {
 
   debugRect: Phaser.GameObjects.Rectangle;
 
+  current_wind_y_velocity: number = 0;
+
   constructor(
     private scene: Phaser.Scene,
     x: number,
@@ -49,7 +51,7 @@ export class Player extends EventEmitter<'on-falling-end'> {
   update() {
     const velocity = new Vector2(0, 0);
 
-    velocity.add(new Vector2(0, WIND_Y_VELOCITY));
+    velocity.add(new Vector2(0, this.current_wind_y_velocity));
 
     if (this.keys.left?.isDown) {
       velocity.subtract(new Vector2(PLAYER_VELOCITY, 0));
@@ -59,7 +61,7 @@ export class Player extends EventEmitter<'on-falling-end'> {
       velocity.add(new Vector2(PLAYER_VELOCITY, 0));
     }
 
-    if (isInDev()) {
+    if (isInDev() || this.current_wind_y_velocity === 0) {
       if (this.keys.up?.isDown) {
         velocity.subtract(new Vector2(0, PLAYER_VELOCITY * 1.5));
       }
@@ -70,7 +72,7 @@ export class Player extends EventEmitter<'on-falling-end'> {
     }
 
     if (velocity.x !== 0) {
-      this.sprite.setScale(velocity.x > 0 ? -1 : 1, 1);
+      this.sprite.flipX = velocity.x > 0;
     }
 
     this.body.velocity.set(velocity.x, velocity.y);
@@ -106,6 +108,14 @@ export class Player extends EventEmitter<'on-falling-end'> {
       },
     });
   };
+
+  enterAirplane = () => {
+    this.current_wind_y_velocity = Math.max(this.current_wind_y_velocity - WIND_Y_VELOCITY, 0)
+  }
+
+  exitAirplane = () => {
+    this.current_wind_y_velocity = Math.min(this.current_wind_y_velocity + WIND_Y_VELOCITY, WIND_Y_VELOCITY)
+  }
 }
 
 // const particlesGroup = this.scene.add.group(
