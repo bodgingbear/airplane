@@ -13,6 +13,8 @@ export class GameScene extends Phaser.Scene {
 
   fallingController!: FallingController;
 
+  planeBorders!: Phaser.Physics.Arcade.StaticGroup;
+
   public constructor() {
     super({
       key: 'GameScene',
@@ -27,7 +29,7 @@ export class GameScene extends Phaser.Scene {
 
     const diode = new DiodeObstacle(
       this,
-      planeOrigin.x + 180,
+      planeOrigin.x + 182,
       planeOrigin.y + 23,
       keys
     );
@@ -54,8 +56,11 @@ export class GameScene extends Phaser.Scene {
 
     this.fallingController = new FallingController(airplane, this.player);
     this.fallingController.on('player-off-airplane', () => {
-      alert('out');
+      this.player.fallOffAirplane();
     });
+    this.player.on('on-falling-end', () => this.scene.restart());
+
+    this.cameras.main.shake(10000, 0.00005);
   }
 
   public update(): void {

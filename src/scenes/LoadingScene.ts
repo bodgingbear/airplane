@@ -38,6 +38,8 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('screw3', 'images/screw3.png');
     this.load.image('screw4', 'images/screw4.png');
     this.load.image('screw5', 'images/screw5.png');
+    this.load.image('diode', 'images/diode.png');
+    this.load.image('diode-off', 'images/diode_off.png');
   }
 
   public preload(): void {
