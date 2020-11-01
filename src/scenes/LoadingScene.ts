@@ -45,7 +45,10 @@ export class LoadingScene extends Phaser.Scene {
 
     // MARK: Audio
 
-    this.load.audio(Sound.hammer, 'audio/hammer.mp3')
+    for (let soundName in Sound) { 
+      this.load.audio(soundName, `audio/${soundName}.mp3`);
+    }
+
   }
 
   public preload(): void {

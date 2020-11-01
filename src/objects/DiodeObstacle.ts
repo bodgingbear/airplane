@@ -1,5 +1,6 @@
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
+import { Sound } from '../sounds';
 
 const DIODE_ZONE_SIDE = 20;
 
@@ -17,7 +18,7 @@ export class DiodeObstacle implements Obstacle {
   }
 
   constructor(
-    scene: Phaser.Scene,
+    private scene: Phaser.Scene,
     private x: number,
     private y: number,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys,
@@ -39,6 +40,8 @@ export class DiodeObstacle implements Obstacle {
         this.fix();
       }
     });
+
+    scene.sound.add(Sound.diode);
   }
 
   getID = () => {
@@ -49,6 +52,7 @@ export class DiodeObstacle implements Obstacle {
     this.image.setTexture('diode');
     this.functioningState = 'working';
     this.text.setVisible(false);
+    this.scene.sound.play(Sound.diode);
   }
 
   markPlayerInProximity = () => {

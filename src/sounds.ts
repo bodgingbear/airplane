@@ -1,3 +1,4 @@
 export enum Sound {
-    hammer = 'hammer'
+    hammer = 'hammer',
+    diode = 'diode'
 }
