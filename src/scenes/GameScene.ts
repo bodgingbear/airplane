@@ -1,3 +1,4 @@
+import { isInDev } from 'isInDev';
 import { Airplane } from 'objects/Airplane';
 import { DiodeObstacle } from 'objects/DiodeObstacle';
 import { FallingController } from 'objects/FallingController';
@@ -12,8 +13,6 @@ export class GameScene extends Phaser.Scene {
   proximityController!: ProximityController;
 
   fallingController!: FallingController;
-
-  planeBorders!: Phaser.Physics.Arcade.StaticGroup;
 
   public constructor() {
     super({
@@ -60,12 +59,18 @@ export class GameScene extends Phaser.Scene {
     });
     this.player.on('on-falling-end', () => this.scene.restart());
 
-    this.cameras.main.shake(10000, 0.00005);
+    this.cameras.main.shake(100 * 60 * 10, isInDev() ? 0 : 0.00005);
+
+    const hullBounds = this.add.group(
+      airplane.hullBounds
+    )
+
+    this.physics.add.collider(this.player.sprite, hullBounds)
   }
 
   public update(): void {
     this.player.update();
-    this.proximityController.update();
+  this.proximityController.update();
     this.fallingController.update();
   }
 }
