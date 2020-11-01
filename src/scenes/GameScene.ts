@@ -46,22 +46,23 @@ export class GameScene extends Phaser.Scene {
     const keys = this.input.keyboard.createCursorKeys();
 
     this.obstacles = [
-      // new DiodeObstacle(
-      //   this,
-      //   planeOrigin.x + 182,
-      //   planeOrigin.y + 23,
-      //   keys,
-      //   'right'
-      // ),
-      // new DiodeObstacle(
-      //   this,
-      //   planeOrigin.x - 182,
-      //   planeOrigin.y + 23,
-      //   keys,
-      //   'left'
-      // ),
-      // new ScrewObstacle(this, planeOrigin.x + 30, planeOrigin.y + 12, keys),
+      new DiodeObstacle(
+        this,
+        planeOrigin.x + 182,
+        planeOrigin.y + 23,
+        keys,
+        'right'
+      ),
+      new DiodeObstacle(
+        this,
+        planeOrigin.x - 182,
+        planeOrigin.y + 23,
+        keys,
+        'left'
+      ),
 
+      new ScrewObstacle(this, planeOrigin.x + 30, planeOrigin.y + 12, keys),
+      new ScrewObstacle(this, planeOrigin.x - 30, planeOrigin.y + 12, keys),
       new Slider(this, planeOrigin.x + 135, planeOrigin.y + 17, keys),
     ];
 
