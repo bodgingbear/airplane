@@ -53,7 +53,7 @@ export class GameScene extends Phaser.Scene {
       keys
     );
 
-    this.player = new Player(this, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / 2, keys);
+    this.player = new Player(this, SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2, keys);
 
     this.cameras.main
       .setZoom(ZOOM)
@@ -72,9 +72,15 @@ export class GameScene extends Phaser.Scene {
     this.fallingController.on('player-off-airplane', () => {
       this.player.fallOffAirplane();
     });
+    this.fallingController.on('player-entered-airplane', () => {
+      this.player.enterAirplane();
+      this.cameras.main.shakeEffect.effectComplete();
+    })
+    this.fallingController.on('player-exit-airplane', () => {
+      this.player.exitAirplane();
+      this.cameras.main.shake(100 * 60 * 10, isInDev() ? 0 : 0.00005);
+    })
     this.player.on('on-falling-end', () => this.scene.restart());
-
-    this.cameras.main.shake(100 * 60 * 10, isInDev() ? 0 : 0.00005);
 
     const hullBounds = this.add.group(airplane.hullBounds);
 
