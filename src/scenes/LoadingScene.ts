@@ -1,5 +1,6 @@
 import { loadAsset } from 'packages/utils';
 import { shouldSkipIntro } from 'packages/utils/shouldSkipIntro';
+import { Sound } from 'sounds';
 
 export class LoadingScene extends Phaser.Scene {
   private introImage!: Phaser.GameObjects.Sprite;
@@ -29,6 +30,8 @@ export class LoadingScene extends Phaser.Scene {
       frameHeight: 19,
     });
 
+    // MARK: Images
+
     this.load.image('plane', 'images/plane.png');
     this.load.image('screw0', 'images/screw0.png');
     this.load.image('screw1', 'images/screw1.png');
@@ -39,6 +42,10 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('diode', 'images/diode.png');
     this.load.image('diode-off', 'images/diode_off.png');
     this.load.image('clouds', 'images/clouds.png');
+
+    // MARK: Audio
+
+    this.load.audio(Sound.hammer, 'audio/hammer.mp3')
   }
 
   public preload(): void {

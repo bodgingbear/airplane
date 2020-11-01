@@ -1,5 +1,6 @@
 import { ZOOM } from 'constants';
 import { FunctioningState, Obstacle } from './Obstacle';
+import { Sound } from 'sounds';
 
 const SCREW_ZONE_SIDE = 20;
 
@@ -33,6 +34,7 @@ export class ScrewObstacle implements Obstacle {
         keys.space?.on('down', () => {
           if (this.needsFix && this.isInPlayerProximity && this.livesLeft > 0) {
             this.livesLeft--;
+            scene.sound.play(Sound.hammer);
           }
           if (this.livesLeft === 9) {
               console.log(9);
@@ -52,6 +54,8 @@ export class ScrewObstacle implements Obstacle {
               this.fix();
           }
         });
+
+        scene.sound.add(Sound.hammer);
       }
       
   getID = () => {
