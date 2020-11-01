@@ -1,10 +1,15 @@
 /* eslint-disable new-cap */
-import { Sound } from 'sounds';
+import { BogdanVoice } from 'sounds';
 import { Obstacle } from './Obstacle';
 
 export class ObstaclesSpawner {
+
   constructor(scene: Phaser.Scene, obstacles: Obstacle[]) {
     let easiness = 10;
+
+    for (const voice in BogdanVoice) { 
+      scene.sound.add(voice);
+    }
 
     const callback = () => {
       const minNextSpawnTime = easiness * 2000;
@@ -30,8 +35,7 @@ export class ObstaclesSpawner {
       const obstacle =
         workingObstacles[Phaser.Math.Between(0, workingObstacles.length - 1)];
 
-      // @TODO play sth else
-      scene.sound.play(Sound.diode);
+      scene.sound.play(`bogdan${Phaser.Math.Between(0, 4)}`);
       obstacle.break();
     };
 

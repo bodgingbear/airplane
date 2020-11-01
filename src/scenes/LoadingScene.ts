@@ -1,6 +1,6 @@
 import { loadAsset } from 'packages/utils';
 import { shouldSkipIntro } from 'packages/utils/shouldSkipIntro';
-import { Sound } from 'sounds';
+import { Sound, BogdanVoice } from 'sounds';
 
 export class LoadingScene extends Phaser.Scene {
   private introImage!: Phaser.GameObjects.Sprite;
@@ -55,6 +55,11 @@ export class LoadingScene extends Phaser.Scene {
     for (const soundName in Sound) {
       this.load.audio(soundName, `audio/${soundName}.mp3`);
     }
+
+    for (const voice in BogdanVoice) {
+      this.load.audio(voice, `audio/${voice}.mp3`);
+    }
+    
   }
 
   public preload(): void {

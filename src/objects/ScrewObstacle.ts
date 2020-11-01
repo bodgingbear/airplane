@@ -11,6 +11,7 @@ export class ScrewObstacle implements Obstacle {
   text: Phaser.GameObjects.Text;
 
   functioningState: FunctioningState = 'working';
+  altitudeDecrease: number = 2;
 
   isInPlayerProximity = false;
 
