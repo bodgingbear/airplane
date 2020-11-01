@@ -2,8 +2,8 @@ export const Sound = {
   hammer : 'hammer',
   diode : 'diode',
   grubasSpada : 'Grubas-spada', //done
-  walkingOnWing : 'Walking-on-wing',
-  criticalWarning : 'critical-warning',
+  walkingOnWing : 'Walking-on-wing', //done
+  criticalWarning : 'critical-warning', //done
   failedEngine : 'failed-engine',
   fixedEngine : 'fixed-engine',
   introPlaneCrash : 'intro-plane-crash',

@@ -1,5 +1,5 @@
 /* eslint-disable new-cap */
-import { BogdanVoice } from '../sounds';
+import { BogdanVoice, Sound } from '../sounds';
 import { Obstacle } from './Obstacle';
 
 export class ObstaclesSpawner {
@@ -26,6 +26,7 @@ export class ObstaclesSpawner {
         (obstacle) => obstacle.functioningState === 'broken'
       );
       if (brokenObstacles.length > 0) {
+        scene.sound.play(Sound.criticalWarning)
         brokenObstacles[0].makeCritical();
       }
 

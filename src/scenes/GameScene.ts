@@ -119,7 +119,7 @@ export class GameScene extends Phaser.Scene {
 
     this.altitudeProvider.on('plane-crashed', this.endGame);
 
-    this.fallingController = new FallingController(airplane, this.player);
+    this.fallingController = new FallingController(airplane, this.player, this);
     this.fallingController.on('player-off-airplane', () => {
       this.player.fallOffAirplane();
     });
