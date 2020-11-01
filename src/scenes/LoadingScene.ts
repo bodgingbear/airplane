@@ -51,6 +51,8 @@ export class LoadingScene extends Phaser.Scene {
     this.load.image('clouds', 'images/clouds.png');
     this.load.image('warning', 'images/warning.png');
     this.load.image('warning2', 'images/warning2.png');
+    this.load.image('passengers-up', 'images/passengers_top.png');
+    this.load.image('passengers-down', 'images/passengers_down.png');
 
     // MARK: Audio
 
@@ -61,7 +63,6 @@ export class LoadingScene extends Phaser.Scene {
     for (const voice in BogdanVoice) {
       this.load.audio(voice, `audio/${voice}.mp3`);
     }
-    
   }
 
   public preload(): void {
