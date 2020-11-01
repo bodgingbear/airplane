@@ -1,3 +1,4 @@
+import { isInDev } from 'isInDev';
 import { Sound } from 'sounds';
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
@@ -47,6 +48,9 @@ export class ScrewObstacle implements Obstacle {
       .setDepth(5)
       .setBackgroundColor('black');
 
+      const bound = this.getZoneBounds()
+      scene.add.rectangle(bound.x, bound.y, bound.width, bound.height, 0xff0000, isInDev() ? 0.5 : 0).setOrigin(0)
+
     keys.space?.on('down', () => {
       if (this.needsFix && this.isInPlayerProximity && this.livesLeft > 0) {
         this.livesLeft--;
@@ -83,6 +87,10 @@ export class ScrewObstacle implements Obstacle {
     this.functioningState = 'broken';
     this.image.setTexture('screw1');
     this.indicator.indicateBroken();
+
+    if (this.isInPlayerProximity) {
+      this.text.setVisible(true);
+    }
   }
 
   getID = () => {
@@ -115,7 +123,7 @@ export class ScrewObstacle implements Obstacle {
   getZoneBounds = (): Phaser.Geom.Rectangle => {
     return new Phaser.Geom.Rectangle(
       this.x - SCREW_ZONE_SIDE / 2,
-      this.y - SCREW_ZONE_SIDE / 2,
+      this.y - SCREW_ZONE_SIDE / 2 + 5,
       SCREW_ZONE_SIDE,
       SCREW_ZONE_SIDE
     );
