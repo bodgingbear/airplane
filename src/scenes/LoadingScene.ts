@@ -31,7 +31,7 @@ export class LoadingScene extends Phaser.Scene {
     });
 
     this.load.spritesheet('stweardess', 'images/stweardess.png', {
-      frameWidth: 7,
+      frameWidth: 8,
       frameHeight: 27,
     });
 
