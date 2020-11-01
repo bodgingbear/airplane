@@ -11,6 +11,7 @@ export class DiodeObstacle implements Obstacle {
   text: Phaser.GameObjects.Text;
 
   functioningState: FunctioningState = 'working';
+
   altitudeDecrease: number = 5;
 
   isInPlayerProximity = false;
@@ -37,6 +38,8 @@ export class DiodeObstacle implements Obstacle {
         'Press SPACE to fix the diode.'
       )
       .setVisible(false)
+      .setBackgroundColor('black')
+      .setDepth(5)
       .setScale(1 / ZOOM);
 
     keys.space?.on('down', () => {

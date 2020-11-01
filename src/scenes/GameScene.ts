@@ -75,7 +75,8 @@ export class GameScene extends Phaser.Scene {
         keys,
         'left'
       ),
-      new Slider(this, planeOrigin.x + 135, planeOrigin.y + 17, keys),
+      new Slider(this, planeOrigin.x + 50, planeOrigin.y - 13, keys),
+      new Slider(this, planeOrigin.x - 50, planeOrigin.y - 13, keys),
     ];
 
     this.player = new Player(

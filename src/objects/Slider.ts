@@ -41,6 +41,8 @@ export class Slider implements Obstacle {
 
     this.text = scene.add
       .text(x + 8, y - 8, `Press SPACE on the green zone to repair the flap`)
+      .setBackgroundColor('black')
+      .setDepth(5)
       .setVisible(false)
       .setScale(1 / ZOOM);
 
