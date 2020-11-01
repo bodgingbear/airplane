@@ -4,16 +4,22 @@ import { Clouds } from 'objects/Clouds';
 import { DiodeObstacle } from 'objects/DiodeObstacle';
 import { FallingController } from 'objects/FallingController';
 import { Player } from 'objects/Player';
+import { Stweardess } from 'objects/Stweardess';
 import { ProximityController } from 'objects/ProximityController';
 import { ScrewObstacle } from 'objects/ScrewObstacle';
 import { SCREEN_HEIGHT, SCREEN_WIDTH, Vector2, ZOOM } from '../constants';
 
 export class GameScene extends Phaser.Scene {
   player!: Player;
+  stweardess!: Stweardess;
 
   proximityController!: ProximityController;
 
   fallingController!: FallingController;
+
+  get characters(): Phaser.GameObjects.Sprite[] { 
+    return [this.player.sprite, this.stweardess.sprite]
+  }
 
   public constructor() {
     super({
@@ -49,12 +55,10 @@ export class GameScene extends Phaser.Scene {
 
     obstacles.forEach((obs) => obs.break());
 
-    this.player = new Player(
-      this,
-      SCREEN_WIDTH / 2 - 80,
-      SCREEN_HEIGHT / 2,
-      keys
-    );
+    this.player = new Player(this, SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2, keys);
+    this.stweardess = new Stweardess(this, SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 35);
+
+    this.physics.add.collider(this.player.sprite, this.stweardess.sprite);
 
     this.cameras.main
       .setZoom(ZOOM)
@@ -84,11 +88,15 @@ export class GameScene extends Phaser.Scene {
 
     const hullBounds = this.add.group(airplane.hullBounds);
 
-    this.physics.add.collider(this.player.sprite, hullBounds);
+    for (const character of this.characters) {
+      this.physics.add.collider(character, hullBounds);
+    }
+
   }
 
   public update(): void {
     this.player.update();
+    this.stweardess.update();
     this.proximityController.update();
     this.fallingController.update();
   }

@@ -30,6 +30,11 @@ export class LoadingScene extends Phaser.Scene {
       frameHeight: 19,
     });
 
+    this.load.spritesheet('stweardess', 'images/stweardess.png', {
+      frameWidth: 7,
+      frameHeight: 27,
+    });
+
     // MARK: Images
 
     this.load.image('plane', 'images/plane.png');
@@ -67,6 +72,16 @@ export class LoadingScene extends Phaser.Scene {
         end: -1,
       }),
       frameRate: 6,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'stweardess-walk',
+      frames: this.anims.generateFrameNumbers('stweardess', {
+        start: 0,
+        end: -1,
+      }),
+      frameRate: 3,
       repeat: -1,
     });
   }
