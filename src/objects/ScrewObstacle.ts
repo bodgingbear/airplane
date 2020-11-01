@@ -1,3 +1,4 @@
+import { Sound } from 'sounds';
 import { ZOOM } from '../constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
@@ -39,8 +40,11 @@ export class ScrewObstacle implements Obstacle {
     keys.space?.on('down', () => {
       if (this.needsFix && this.isInPlayerProximity && this.livesLeft > 0) {
         this.livesLeft--;
+        scene.sound.play(Sound.hammer);
       }
       if (this.livesLeft === 9) {
+        console.log(9);
+
         this.image.setTexture('screw1');
       }
       if (this.livesLeft === 7) {
@@ -56,6 +60,8 @@ export class ScrewObstacle implements Obstacle {
         this.fix();
       }
     });
+
+    scene.sound.add(Sound.hammer);
   }
 
   getID = () => {

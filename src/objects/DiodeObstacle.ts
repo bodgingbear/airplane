@@ -1,7 +1,7 @@
 import { ZOOM } from 'constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
-const DIODE_ZONE_SIDE = 10;
+const DIODE_ZONE_SIDE = 20;
 
 export class DiodeObstacle implements Obstacle {
   image: Phaser.GameObjects.Image;
