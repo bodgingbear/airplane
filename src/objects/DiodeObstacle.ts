@@ -1,7 +1,7 @@
 import { ZOOM } from 'constants';
 import { FunctioningState, Obstacle } from './Obstacle';
 
-const DIODE_ZONE_SIDE = 100;
+const DIODE_ZONE_SIDE = 20;
 
 export class DiodeObstacle implements Obstacle {
   image: Phaser.GameObjects.Image;
@@ -22,7 +22,7 @@ export class DiodeObstacle implements Obstacle {
     private y: number,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
-    this.image = scene.add.image(x, y, 'diode-red');
+    this.image = scene.add.image(x, y, 'diode-off');
 
     this.text = scene.add
       .text(x + 8, y - 8, 'Press SPACE to fix the diode.')
@@ -41,7 +41,7 @@ export class DiodeObstacle implements Obstacle {
   };
 
   fix() {
-    this.image.setTexture('diode-green');
+    this.image.setTexture('diode');
     this.functioningState = 'working';
     this.text.setVisible(false);
   }
@@ -62,8 +62,8 @@ export class DiodeObstacle implements Obstacle {
 
   getZoneBounds = (): Phaser.Geom.Rectangle => {
     return new Phaser.Geom.Rectangle(
-      this.x,
-      this.y,
+      this.x - DIODE_ZONE_SIDE / 2,
+      this.y - DIODE_ZONE_SIDE / 2,
       DIODE_ZONE_SIDE,
       DIODE_ZONE_SIDE
     );

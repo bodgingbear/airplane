@@ -1,11 +1,13 @@
+import { EventEmitter } from 'packages/utils';
 import { Vector2 } from '../constants';
+import { isInDev } from '../isInDev';
 
 const PLAYER_COUNTER_WIND_JUMP_Y = 2;
-const WIND_Y_VELOCITY = process.env.IN_DEV ? 0 : 10;
+const WIND_Y_VELOCITY = isInDev() ? 0 : 10;
 
 const PLAYER_VELOCITY = 20;
 
-export class Player {
+export class Player extends EventEmitter<'on-falling-end'> {
   body: Phaser.Physics.Arcade.Body;
 
   sprite: Phaser.GameObjects.Sprite;
@@ -13,17 +15,18 @@ export class Player {
   debugRect: Phaser.GameObjects.Rectangle;
 
   constructor(
-    scene: Phaser.Scene,
+    private scene: Phaser.Scene,
     x: number,
     y: number,
     private keys: Phaser.Types.Input.Keyboard.CursorKeys
   ) {
+    super();
     this.sprite = scene.add.sprite(x, y, 'player');
     scene.physics.world.enable(this.sprite);
 
     this.body = this.sprite.body as Phaser.Physics.Arcade.Body;
 
-    if (!process.env.IN_DEV) {
+    if (!isInDev()) {
       this.keys.up?.on('down', () => {
         this.sprite.setY(this.sprite.y - PLAYER_COUNTER_WIND_JUMP_Y);
       });
@@ -56,7 +59,7 @@ export class Player {
       velocity.add(new Vector2(PLAYER_VELOCITY, 0));
     }
 
-    if (process.env.IN_DEV) {
+    if (isInDev()) {
       if (this.keys.up?.isDown) {
         velocity.subtract(new Vector2(0, PLAYER_VELOCITY * 1.5));
       }
@@ -77,12 +80,40 @@ export class Player {
     this.debugRect.setPosition(bound.x, bound.y);
   }
 
-  getBounds = (): Phaser.Geom.Rectangle => {
-    return new Phaser.Geom.Rectangle(
+  getBounds = (): Phaser.Geom.Rectangle =>
+    new Phaser.Geom.Rectangle(
       this.sprite.getTopLeft().x,
       this.sprite.getTopLeft().y,
       this.sprite.displayWidth,
       this.sprite.displayHeight
     );
+
+  fallOffAirplane = () => {
+    const duration = 2000;
+    this.scene.cameras.main.shake(2000, 0.0005);
+    this.scene.tweens.add({
+      targets: this.sprite,
+      angle: { from: 0, to: 360 },
+      duration,
+    });
+
+    this.scene.tweens.add({
+      targets: this.sprite,
+      y: { from: this.sprite.y, to: this.sprite.y + 500 },
+      duration,
+      onComplete: () => {
+        this.emit('on-falling-end');
+      },
+    });
   };
 }
+
+// const particlesGroup = this.scene.add.group(
+//   this.particles.map((particle) => particle.gameObject)
+// );
+
+// this.scene.physics.add.collider(particlesGroup, particlesGroup);
+// this.scene.physics.add.collider(this.bar, particlesGroup);
+// this.scene.physics.add.collider(this.bar, particlesGroup);
+
+// this.scene.physics.world.on('worldbounds', this.onParticlesBoundCollision);
