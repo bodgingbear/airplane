@@ -1,6 +1,7 @@
 import { loadAsset } from 'packages/utils';
 import { shouldSkipIntro } from 'packages/utils/shouldSkipIntro';
 import { Sound } from 'sounds';
+import { TEAM } from '../constants';
 
 export class LoadingScene extends Phaser.Scene {
   private introImage!: Phaser.GameObjects.Sprite;
@@ -65,7 +66,6 @@ export class LoadingScene extends Phaser.Scene {
       this.load.audio(value, `audio/${value}.mp3`);
     });
 
-
     // MARK: Intro
     this.load.image('intro1-1', loadAsset('images/intro1/intro1.png'));
     this.load.image('intro1-2', loadAsset('images/intro1/intro2.png'));
@@ -95,6 +95,7 @@ export class LoadingScene extends Phaser.Scene {
       this.showLoadingAnimation();
     }
 
+    this.loadCreditsAssets();
     this.loadAssets();
   }
 
@@ -279,11 +280,28 @@ export class LoadingScene extends Phaser.Scene {
     this.introImage.on('animationcomplete', this.changeScene);
   };
 
+  private loadCreditsAssets = () => {
+    this.load.image('credits_logo', loadAsset('images/credits/logo.png'));
+    this.load.image(
+      'credits_logo_hover',
+      loadAsset('images/credits/logo_outline.png')
+    );
+    this.load.image(
+      'credits_background',
+      loadAsset('images/credits/gradient.png')
+    );
+    // eslint-disable-next-line no-restricted-syntax
+    for (const { imageKey, imagePath } of TEAM) {
+      this.load.image(imageKey, loadAsset(imagePath));
+    }
+  };
+
   private changeScene = () => {
     if (process.env.SKIP_INTRO2 === 'true') {
       this.scene.start('GameScene');
     } else {
-      this.scene.start('IntroScene');
+      this.scene.start('MainMenuScene');
+      // this.scene.start('IntroScene');
     }
   };
 }

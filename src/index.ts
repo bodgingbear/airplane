@@ -4,11 +4,12 @@ import './index.css';
 
 import { UIScene } from 'scenes/UIScene';
 import { IntroScene } from 'scenes/IntroScene';
+import { MainMenuScene } from 'scenes/MainMenuScene';
 import { BootScene } from './scenes/BootScene';
 import { LoadingScene } from './scenes/LoadingScene';
-import { MainMenuScene } from './scenes/MainMenuScene';
 import { GameScene } from './scenes/GameScene';
 import { DeadScene } from './scenes/DeadScene';
+import { CreditsScene } from './scenes/CreditsScene';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -18,11 +19,12 @@ const game = new Phaser.Game({
   scene: [
     BootScene,
     LoadingScene,
-    MainMenuScene,
     GameScene,
     UIScene,
     IntroScene,
     DeadScene,
+    CreditsScene,
+    MainMenuScene,
   ],
   scale: {
     parent: 'app',

@@ -41,26 +41,6 @@ export class IntroScene extends Phaser.Scene {
     intro2sprite.setScale(14);
     intro2sprite.setVisible(false);
 
-    const intro3Bg = this.add.sprite(1280 / 2, 720 / 2, 'intro3-0');
-    intro3Bg.setScale(7.5);
-    intro3Bg.setVisible(false);
-
-    const t1 = this.add
-      .text(1280 / 2, 720 / 2 - 310, "It shouldn't be doing that...", {
-        fontFamily: 'Pixel miners',
-        fontSize: '48px',
-      })
-      .setOrigin(0.5, 0.5)
-      .setVisible(false);
-
-    const t2 = this.add
-      .text(1280 / 2, 720 / 2 + 310, 'Press any key to start', {
-        fontFamily: 'Pixel miners',
-        fontSize: '24px',
-      })
-      .setOrigin(0.5, 0.5)
-      .setVisible(false);
-
     intro1.anims.play('intro-1-anim');
     this.sound.play(Sound.introPlaneCrash);
 
@@ -77,19 +57,8 @@ export class IntroScene extends Phaser.Scene {
 
     intro2sprite.on('animationcomplete', () => {
       setTimeout(() => {
-        intro3Bg.setVisible(true);
-        intro3Bg.anims.play('intro-3-anim');
+        this.scene.start('MainMenuScene');
       }, 500);
-    });
-
-    intro3Bg.on('animationcomplete', () => {
-      intro3Bg.anims.play('intro-3-anim-2');
-      t1.setVisible(true);
-      t2.setVisible(true);
-
-      this.input.keyboard.on('keydown', (): void => {
-        this.scene.start('GameScene');
-      });
     });
   }
 }
