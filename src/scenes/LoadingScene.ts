@@ -300,8 +300,7 @@ export class LoadingScene extends Phaser.Scene {
     if (process.env.SKIP_INTRO2 === 'true') {
       this.scene.start('GameScene');
     } else {
-      this.scene.start('MainMenuScene');
-      // this.scene.start('IntroScene');
+      this.scene.start('IntroScene');
     }
   };
 }

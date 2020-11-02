@@ -3,6 +3,8 @@ import { TextButton } from 'packages/text-button';
 export class MainMenuScene extends Phaser.Scene {
   private skipAnimation: boolean = false;
 
+  private finished = false;
+
   public constructor() {
     super({
       key: 'MainMenuScene',
@@ -43,13 +45,7 @@ export class MainMenuScene extends Phaser.Scene {
     });
     howToPlayButton.on('click', () => this.scene.start('HowToPlayScene'));
 
-    let finished = false;
-
-    this.input.keyboard.addKey('SPACE').on('down', (): void => {
-      if (finished) {
-        this.scene.start('GameScene');
-      }
-    });
+    this.input.keyboard.addKey('SPACE').on('down', this.onSpacePress);
 
     if (!this.skipAnimation) {
       intro3Bg.anims.play('intro-3-anim');
@@ -57,8 +53,8 @@ export class MainMenuScene extends Phaser.Scene {
       t2.setVisible(false);
       creditsButton.setVisible(false);
       howToPlayButton.setVisible(false);
-      finished = true;
     } else {
+      this.finished = true;
       intro3Bg.anims.play('intro-3-anim-2');
     }
 
@@ -68,7 +64,13 @@ export class MainMenuScene extends Phaser.Scene {
       t2.setVisible(true);
       creditsButton.setVisible(true);
       howToPlayButton.setVisible(true);
-      finished = true;
+      this.finished = true;
     });
   }
+
+  private onSpacePress = (): void => {
+    if (this.finished) {
+      this.scene.start('GameScene');
+    }
+  };
 }
