@@ -1,3 +1,4 @@
+import { TextButton } from 'packages/text-button';
 import { Sound } from 'sounds';
 
 export class IntroScene extends Phaser.Scene {
@@ -10,6 +11,21 @@ export class IntroScene extends Phaser.Scene {
   }
 
   public create() {
+    const skipIntroButton = new TextButton(
+      this,
+      1280 - 32,
+      720 - 32,
+      'Skip intro',
+      {
+        originX: 1,
+        originY: 1,
+      }
+    );
+    skipIntroButton.on('click', () => {
+      this.sound.stopAll();
+      this.scene.start('MainMenuScene', { skipAnimation: true });
+    });
+
     const intro1 = this.add.sprite(1280 / 2, 720 / 2, 'intro1-1');
     intro1.setScale(7.5);
 
@@ -56,9 +72,11 @@ export class IntroScene extends Phaser.Scene {
     });
 
     intro2sprite.on('animationcomplete', () => {
-      setTimeout(() => {
-        this.scene.start('MainMenuScene');
-      }, 500);
+      this.time.addEvent({
+        delay: 500,
+        callback: () => this.scene.start('MainMenuScene'),
+        loop: false,
+      });
     });
   }
 }
