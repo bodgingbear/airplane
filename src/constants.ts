@@ -28,8 +28,8 @@ export const TEAM: TeamMemberData[] = [
   {
     name: 'Bogdan Bankowski',
     role: 'Programming',
-    imageKey: 'kacper_credits',
-    imagePath: 'images/credits/kacper.png',
+    imageKey: 'bogdan_credits',
+    imagePath: 'images/credits/bogdan.png',
   },
   {
     name: 'Kuba Pietrzak',
