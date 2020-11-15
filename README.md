@@ -1,6 +1,6 @@
 # It shouldn't be doing this...
 
-Perform a pest control for these wizards' pistol
+Calm down the nervous passenger by fixing the plane
 
 ![ ](https://raw.githubusercontent.com/bodgingbear/airplane/master/website/screenshot.png)
 
