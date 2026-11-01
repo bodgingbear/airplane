@@ -12,7 +12,7 @@ This game was created during **PJATK Game Jam 3 (2020)**
 
 ## Play online
 
-[https://airplane.bodgingbear.dev](https://airplane.bodgingbear.dev/)
+[https://bodgingbear.dev/projects/airplane/play/](https://bodgingbear.dev/projects/airplane/play/)
 
 ## Links
 * GitHub: [https://github.com/bodgingbear/airplane](https://github.com/bodgingbear/airplane/)
