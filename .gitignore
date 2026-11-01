@@ -5,3 +5,8 @@ yarn-error.log
 .env
 electron-dist
 .vscode
+yarn.lock
+
+# Cloudflare Worker assets
+cf-dist
+.wrangler

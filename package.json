@@ -10,7 +10,9 @@
     "lint:tsc": "tsc --noEmit",
     "lint:eslint": "eslint src --ext .ts",
     "electron:dev": "electron ./electron.js",
-    "electron:dist": "electron-builder -mw -c _config/electron/electron-builder.json"
+    "electron:dist": "electron-builder -mw -c _config/electron/electron-builder.json",
+    "build:cf": "npm run build && rm -rf cf-dist && mkdir -p cf-dist/projects/airplane/play && cp -R public/. cf-dist/projects/airplane/play/",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "phaser": "^3.22.0"
@@ -48,7 +50,6 @@
     "eslint-plugin-react-hooks": "^4.0.2",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.13.1",
     "prettier": "^2.0.5",
     "raw-loader": "^4.0.1",
     "react-svg-loader": "^3.0.3",
